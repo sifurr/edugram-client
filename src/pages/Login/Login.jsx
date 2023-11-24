@@ -1,65 +1,36 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import bg from "../../assets/signup-bg.png";
 import logo from '../../assets/edugram-logo.png';
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from 'sweetalert2';
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import bg from '../../assets/login-bg.svg';
 
 
-const SignUp = () => {
-    const { register, formState: { errors }, reset, handleSubmit } = useForm();
-    const { createUser, googleSingIn, logOut, setLoading, updateNewUserProfile } = useAuth();
-    const axiosPublic = useAxiosPublic();
+const Login = () => {
+    const { signIn, googleSingIn } = useAuth();
+    const { register, formState: { errors }, handleSubmit } = useForm();
     const navigate = useNavigate();
     const location = useLocation();
+    const axiosPublic = useAxiosPublic();
     const from = location?.state?.from?.pathname || '/';
 
-    const onSubmit = (data) => {
-        // console.log(data);
 
-        createUser(data.email, data.password)
+    const onSubmit = data => {
+        signIn(data.email, data.password)
             .then(res => {
-
-                setLoading(true)
-                updateNewUserProfile(data.name, data.photoURL)
-                    .then(() => {
-                        const userInfo = {
-                            name: data.name,
-                            email: data.email
-                        }
-                        axiosPublic.post('/api/v1/users', userInfo)
-                            .then(res => {
-                                if (res.data.insertedId) {
-                                    reset();
-                                    Swal.fire({
-                                        title: "Signed up successfully!",
-                                        text: "",
-                                        icon: "success",
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                    setLoading(false);
-                                    logOut()
-                                        .then(() => {
-                                            // console.log("");
-                                            navigate(from, { replace: true })
-                                        })
-                                        .catch(err => {
-                                            // console.log(err)
-                                        })
-                                }
-                            })
-                    })
-                    .catch(err => {
-                        // console.log(err);
-                    })
-
-
-
+                Swal.fire({
+                    title: "Signed up successfully!",
+                    text: "",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                console.log("user: ", res.user);
+                navigate(from, { replace: true })
             })
             .catch(err => {
-                // console.log(err);
+                console.log(err.message)
             })
     }
 
@@ -82,7 +53,6 @@ const SignUp = () => {
             })
     }
 
-
     return (
 
         <section className="bg-white">
@@ -103,7 +73,7 @@ const SignUp = () => {
                         </Link>
 
                         <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-                            Welcome to Edugram
+                            Login to Edugram
                         </h2>
 
                         <p className="mt-4 leading-relaxed text-white/90">
@@ -137,37 +107,7 @@ const SignUp = () => {
                         </div>
 
                         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 grid grid-cols-6 gap-6">
-                            <div className="col-span-6 sm:col-span-3">
-                                <label
-                                    htmlFor="FirstName"
-                                    className="block text-sm font-medium text-gray-700"
-                                >
-                                    Name
-                                </label>
 
-                                <input
-                                    {...register("name", { required: true })}
-                                    type="text"
-                                    id="FirstName"
-                                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                                />
-                                {errors.name && <span className="text-xs text-red-500 ">Name is required</span>}
-                            </div>
-
-                            <div className="col-span-6">
-                                <label htmlFor="PhotoUrl" className="block text-sm font-medium text-gray-700">
-                                    PhotoUrl
-                                </label>
-
-                                <input
-                                    {...register("photoURL", { required: true })}
-
-                                    type="url"
-                                    id="PhotoUrl"
-                                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                                />
-                                {errors.photoURL && <span className="text-red-600 text-xs">Photo URL is required</span>}
-                            </div>
 
                             <div className="col-span-6 sm:col-span-3">
                                 <label
@@ -225,12 +165,12 @@ const SignUp = () => {
                                 <button
                                     className="inline-block shrink-0 rounded-md border border-[#000927] bg-[#000927] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#000927] focus:outline-none focus:ring active:text-[#000927]"
                                 >
-                                    Create an account
+                                    Login
                                 </button>
 
                                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-                                    Already have an account?
-                                    <Link to="/login" className="text-gray-700 underline"> Log in</Link>
+                                    Do not have an account?
+                                    <Link to="/signup" className="text-gray-700 underline"> Signup</Link>
                                 </p>
                             </div>
                         </form>
@@ -249,4 +189,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Login;
