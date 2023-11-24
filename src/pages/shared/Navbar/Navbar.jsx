@@ -6,12 +6,12 @@ import logo from '../../../assets/edugram-logo.png'
 const Navbar = () => {
 
     return (
-        <nav className="relative bg-white border-b-2 border-gray-300 text-gray-900">
+        <nav className="relative bg-white border-b-2 z-20 border-gray-300 text-gray-900">
             <div className="container mx-auto flex justify-between">
                 <div className="relative block p-4 lg:p-6">
                     <div className=' flex items-center gap-3'>
                         <img className='w-10' src={logo} alt="Edugram Logo" />
-                        <span className='text-2xl text-[#000927] font-bold'>Educgram</span>
+                        <span className='text-2xl text-[#000927] font-bold'>Edugram</span>
                     </div>
                 </div>
 
@@ -39,7 +39,7 @@ const Navbar = () => {
                             <div className="container mx-auto w-full flex flex-wrap justify-end mx-2">
                                 <ul className="px-4 w-full sm:w-1/2 lg:w-1/4 border-gray-600 border-b sm:border-r lg:border-b-0 pb-6 pt-6 lg:pt-3">
                                     <li>
-                                        <Link to="#" className="block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">John Doe</Link>
+                                        <span to="#" className="block p-3 hover:bg-[#000927] text-gray-300 font-bold">John Doe</span>
                                     </li>
                                     <li>
                                         <Link to="#" className="block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Dashboard</Link>
