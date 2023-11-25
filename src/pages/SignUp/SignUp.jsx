@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bg from "../../assets/signup-bg.png";
 import logo from '../../assets/edugram-logo.png';
@@ -26,7 +27,9 @@ const SignUp = () => {
                     .then(() => {
                         const userInfo = {
                             name: data.name,
-                            email: data.email
+                            email: data.email,
+                            role: 'student',
+                            phone: ""
                         }
                         axiosPublic.post('/api/v1/users', userInfo)
                             .then(res => {
@@ -46,20 +49,18 @@ const SignUp = () => {
                                             navigate(from, { replace: true })
                                         })
                                         .catch(err => {
-                                            // console.log(err)
+                                            // console.log("e1",err)
                                         })
                                 }
                             })
                     })
                     .catch(err => {
-                        // console.log(err);
+
+                        // console.log("e2",err);
                     })
-
-
-
             })
             .catch(err => {
-                // console.log(err);
+                // console.log("e3",err);
             })
     }
 
@@ -70,11 +71,34 @@ const SignUp = () => {
                 const userInfo = {
                     name: res.user?.displayName,
                     email: res.user?.email,
+                    role: 'student',
+                    phone: ""
                 }
-                axiosPublic.post('/api/v1/users', userInfo)
+                const email = res.user.email;
+                const user = { email };
+
+                axiosPublic.post("/api/v1/auth/access-token", user, { withCredentials: true })
                     .then(res => {
-                        // console.log(res.data)
-                        navigate(from, { replace: true })
+                        // console.log("token res,", res.data)
+                        if (res.data.success) {
+                            axiosPublic.post("/api/v1/users", userInfo)
+                                .then(result => {
+                                    if (result.data.insertedId) {
+                                        Swal.fire({
+                                            title: "Login successful!",
+                                            text: "",
+                                            icon: "success",
+                                            showConfirmButton: false,
+                                            timer: 1000
+                                        });
+                                        // console.log("user: ", res.user);
+                                        navigate(from, { replace: true })
+                                    }
+                                })
+                            // .catch(err => console.log(err))
+
+
+                        }
                     })
             })
             .catch(err => {

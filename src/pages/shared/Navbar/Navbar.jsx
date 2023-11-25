@@ -5,7 +5,7 @@ import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
 
 
-const Navbar = () => {
+const Navbar = () => {    
     const { user, logOut } = useAuth(); 
 
     const handleLogout = () => {
@@ -70,10 +70,10 @@ const Navbar = () => {
                                 </label>
 
                                 <div role="toggle" className="p-6 mega-menu mb-16 sm:mb-0 shadow-xl bg-[#000927]">
-                                    <div className="container mx-auto w-full flex flex-wrap justify-end mx-2">
+                                    <div className="container mx-auto w-full flex flex-wrap justify-end  ">
                                         <ul className="px-4 w-full sm:w-1/2 lg:w-1/4 border-gray-600 border-b sm:border-r lg:border-b-0 pb-6 pt-6 lg:pt-3">
                                             <li>
-                                                <Link to="#" className="block lg:hidden p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Login</Link>
+                                                <Link to="/login" className="block lg:hidden p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Login</Link>
                                             </li>
                                             <hr className='lg:hidden block' />
                                             <li>
@@ -147,13 +147,8 @@ const Navbar = () => {
 
                                     </div>
                                 </div>
-
                             </li>
-
-
                     }
-
-
                 </ul>
             </div>
         </nav>

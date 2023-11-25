@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from '../../assets/edugram-logo.png';
 import { useForm } from "react-hook-form";
@@ -19,18 +20,27 @@ const Login = () => {
     const onSubmit = data => {
         signIn(data.email, data.password)
             .then(res => {
-                Swal.fire({
-                    title: "Signed up successfully!",
-                    text: "",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                console.log("user: ", res.user);
-                navigate(from, { replace: true })
+                const email = data.email;
+                const user = { email };
+                // console.log("user form login--->", user)
+                axiosPublic.post("/api/v1/auth/access-token", user, { withCredentials: true })
+                    .then(res => {
+                        // console.log(res.data)
+                        if (res.data.success) {
+                            Swal.fire({
+                                title: "Signed up successfully!",
+                                text: "",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                            // console.log("user: ", res.user);
+                            navigate(from, { replace: true })
+                        }
+                    })
             })
             .catch(err => {
-                console.log(err.message)
+                // console.log(err.message)
             })
     }
 
@@ -41,11 +51,36 @@ const Login = () => {
                 const userInfo = {
                     name: res.user?.displayName,
                     email: res.user?.email,
+                    role: 'student',
+                    phone: ""
                 }
-                axiosPublic.post('/api/v1/users', userInfo)
+                const email = res.user.email;  
+                const user = {email};             
+
+                axiosPublic.post("/api/v1/auth/access-token", user, { withCredentials: true })
                     .then(res => {
-                        // console.log(res.data)
-                        navigate(from, { replace: true })
+                        // console.log("token res,", res.data)
+                        if (res.data.success) {
+
+                            axiosPublic.post("/api/v1/users", userInfo)
+                            .then(result => {
+                                if(result.data.insertedId)
+                                {
+                                    Swal.fire({
+                                        title: "Login successful!",
+                                        text: "",
+                                        icon: "success",
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    });
+                                    // console.log("user: ", res.user);
+                                    navigate(from, { replace: true })
+                                }
+                            })
+                            // .catch(err => console.log(err))
+
+                            
+                        }
                     })
             })
             .catch(err => {
