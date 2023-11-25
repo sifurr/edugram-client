@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bg from "../../assets/signup-bg.png";
 import logo from '../../assets/edugram-logo.png';
@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from 'sweetalert2';
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+
 
 
 const SignUp = () => {
@@ -29,7 +30,8 @@ const SignUp = () => {
                             name: data.name,
                             email: data.email,
                             role: 'student',
-                            phone: ""
+                            phone: "",
+                            teacherRequest: false
                         }
                         axiosPublic.post('/api/v1/users', userInfo)
                             .then(res => {
@@ -72,7 +74,8 @@ const SignUp = () => {
                     name: res.user?.displayName,
                     email: res.user?.email,
                     role: 'student',
-                    phone: ""
+                    phone: "",
+                    teacherRequest: false
                 }
                 const email = res.user.email;
                 const user = { email };

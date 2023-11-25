@@ -6,6 +6,7 @@ import Login from "../pages/Login/Login";
 import Dashboard from "../pages/dashboard/Dashboard/Dashboard";
 import Profile from "../pages/dashboard/Profile/Profile";
 import PrivateRoute from "./PrivateRoute";
+import TeachOn from "../pages/dashboard/TeachOn/TeachOn";
 
 
 
@@ -25,7 +26,11 @@ export const router = createBrowserRouter([
             {
                 path: "login",
                 element: <Login />
-            },           
+            },
+            {
+                path: 'teach-on',
+                element: <PrivateRoute><TeachOn/></PrivateRoute>
+            }           
         ]
     },
     {
@@ -35,7 +40,8 @@ export const router = createBrowserRouter([
             {
                 path: 'profile',
                 element: <Profile />
-            }
+            },         
+            
         ]
     }
 ]);

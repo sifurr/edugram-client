@@ -8,6 +8,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import bg from '../../assets/login-bg.svg';
 
 
+
 const Login = () => {
     const { signIn, googleSingIn } = useAuth();
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -28,7 +29,7 @@ const Login = () => {
                         // console.log(res.data)
                         if (res.data.success) {
                             Swal.fire({
-                                title: "Signed up successfully!",
+                                title: "Logged in successfully!",
                                 text: "",
                                 icon: "success",
                                 showConfirmButton: false,
@@ -52,7 +53,9 @@ const Login = () => {
                     name: res.user?.displayName,
                     email: res.user?.email,
                     role: 'student',
-                    phone: ""
+                    phone: "",
+                    teacherRequest: false,
+                    
                 }
                 const email = res.user.email;  
                 const user = {email};             
@@ -67,7 +70,7 @@ const Login = () => {
                                 if(result.data.insertedId)
                                 {
                                     Swal.fire({
-                                        title: "Login successful!",
+                                        title: "Logged in successfully!",
                                         text: "",
                                         icon: "success",
                                         showConfirmButton: false,

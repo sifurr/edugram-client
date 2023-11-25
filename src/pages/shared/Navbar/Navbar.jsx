@@ -3,16 +3,17 @@ import './Navbar.css';
 import logo from '../../../assets/edugram-logo.png'
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import Switcher from '../../../components/Switcher/Switcher';
 
 
-const Navbar = () => {    
-    const { user, logOut } = useAuth(); 
+const Navbar = () => {
+    const { user, logOut } = useAuth();
 
     const handleLogout = () => {
         logOut()
             .then(() => {
                 Swal.fire({
-                    title: "Signed up successfully!",
+                    title: "Logged out successfully!",
                     icon: "success",
                     showConfirmButton: false,
                     timer: 1500
@@ -29,11 +30,11 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="relative bg-white border-b-2 z-20 border-gray-300 text-gray-900">
+        <nav className="relative  border-b-2 z-20 border-gray-300 dark:bg-[#000927] p-4 bg-gray-50 text-neutral-900 dark:text-neutral-300">
             <div className="container mx-auto flex justify-between">
                 <div className="relative block p-4 lg:p-6">
                     <div className=' flex items-center gap-3'>
-                        <img className='w-10' src={logo} alt="Edugram Logo" />
+                        <img className='w-10 dark:bg-white rounded-full' src={logo} alt="Edugram Logo" />
                         <span className='text-2xl text-[#000927] font-bold'>Edugram</span>
                     </div>
                 </div>
@@ -45,18 +46,31 @@ const Navbar = () => {
                     <li className="hidden md:block hover:bg-[#000927] hover:text-white">
                         <Link to="#" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">All Classes</Link>
                     </li>
-                    <li className="hidden md:block hover:bg-[#000927] hover:text-white">
-                        <Link to="#" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">Teach On Edugram</Link>
-                    </li>
+                    
                     {
-                        !user ?                            
-                            <li className="hidden md:block hover:bg-[#000927] hover:text-white">
-                                <Link to="/login" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">Login</Link>
-                            </li>
+                        user &&
+                        
+                        <li className="hidden md:block hover:bg-[#000927] hover:text-white">
+                            <Link to="/teach-on" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">Teach On Edugram</Link>
+                        </li>
+                    }                    
+                    <li className='flex items-center'>
+                        <Switcher />
+                    </li>
+
+                    {
+                        !user ?
+                            <>
+                               
+                                <li className="hidden md:block hover:bg-[#000927] hover:text-white">
+                                    <Link to="/login" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">Login</Link>
+                                </li>
+                            </>
                             :
-                            <li className="hidden md:hidden lg:hidden hover:bg-[#000927] hover:text-white">
-                                <Link to="/login" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">Login</Link>
-                            </li>
+                           
+                                <li className="hidden md:hidden lg:hidden hover:bg-[#000927] hover:text-white">
+                                    <Link to="/login" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">Login</Link>
+                                </li>                            
 
                     }
 
@@ -82,9 +96,7 @@ const Navbar = () => {
                                             <li>
                                                 <Link to="#" className="md:hidden block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">All Classes</Link>
                                             </li>
-                                            <li>
-                                                <Link to="#" className="md:hidden block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Teach On Edugram </Link>
-                                            </li>
+
 
                                         </ul>
 
@@ -123,9 +135,14 @@ const Navbar = () => {
 
                                             {
                                                 user ?
-                                                    <li>
-                                                        <Link onClick={handleLogout} to="#" className="block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Logout</Link>
-                                                    </li>
+                                                    <>
+                                                        <li>
+                                                            <Link to="/teach-on" className="block lg:hidden p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Teach On Edugram</Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link onClick={handleLogout} to="#" className="block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Logout</Link>
+                                                        </li>
+                                                    </>
                                                     :
                                                     <li>
                                                         <Link to="#" className="block lg:hidden p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Login</Link>
@@ -139,9 +156,7 @@ const Navbar = () => {
                                             <li>
                                                 <Link to="#" className="md:hidden block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">All Classes</Link>
                                             </li>
-                                            <li>
-                                                <Link to="#" className="md:hidden block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Teach ON</Link>
-                                            </li>
+
 
                                         </ul>
 
