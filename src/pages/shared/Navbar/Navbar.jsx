@@ -6,8 +6,7 @@ import Swal from 'sweetalert2';
 
 
 const Navbar = () => {
-    const { user, logOut } = useAuth();
- 
+    const { user, logOut } = useAuth(); 
 
     const handleLogout = () => {
         logOut()
@@ -47,7 +46,7 @@ const Navbar = () => {
                         <Link to="#" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">All Classes</Link>
                     </li>
                     <li className="hidden md:block hover:bg-[#000927] hover:text-white">
-                        <Link to="#" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">Teach On</Link>
+                        <Link to="#" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">Teach On Edugram</Link>
                     </li>
                     {
                         !user ?                            
@@ -84,7 +83,7 @@ const Navbar = () => {
                                                 <Link to="#" className="md:hidden block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">All Classes</Link>
                                             </li>
                                             <li>
-                                                <Link to="#" className="md:hidden block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Teach ON</Link>
+                                                <Link to="#" className="md:hidden block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Teach On Edugram </Link>
                                             </li>
 
                                         </ul>
@@ -119,7 +118,7 @@ const Navbar = () => {
                                                 </span>
                                             </li>
                                             <li>
-                                                <Link to="#" className="block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Dashboard</Link>
+                                                <Link to="/dashboard" className="block p-3 hover:bg-[#000927] text-gray-300 hover:text-white">Dashboard</Link>
                                             </li>
 
                                             {
