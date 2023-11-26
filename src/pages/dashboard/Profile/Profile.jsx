@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-
 import Spinner from "../../../components/Spinner";
 import useAuth from "../../../hooks/useAuth";
 import useUser from "../../../hooks/useUser";
+import { Helmet } from "react-helmet-async";
 
 
 const Profile = () => {
@@ -16,7 +16,11 @@ const Profile = () => {
     // console.log("user info from profile--->",data);
 
     return (
-        <div className="w-1/3 min-h-screen flex items-center mx-auto">
+        <div className="w-1/3 min-h-screen flex items-center mx-auto">      
+                           
+            <Helmet>
+                <title>Edugram | Profile</title>
+            </Helmet>
             <article className="rounded-xl dark:border border-2 dark:bg-[#000927] p-4 bg-gray-50 text-neutral-900 dark:text-neutral-300">
                 <div className="flex items-center gap-4">
                     <img

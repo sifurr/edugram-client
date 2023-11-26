@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";                 
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
@@ -45,6 +46,9 @@ const TeachOn = () => {
     // console.log("is admin--->", isAdmin);
     return (
         <div className="dark:bg-[#000927] bg-gray-50 text-neutral-900 dark:text-neutral-300">
+            <Helmet>
+                <title>Edugram | Teach On</title>
+            </Helmet>
             <h2 className='text-3xl text-center'>Teach On Edugram</h2>
             <div>
                 <section>
@@ -198,9 +202,9 @@ const TeachOn = () => {
                                     <div className="mt-4">
                                         <button
                                             type="submit"
-                                            className="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
+                                            className="inline-block w-full rounded-lg bg-black dark:bg-white px-5 py-3 font-medium text-white dark:text-black  sm:w-auto"
                                         >
-                                            Apply
+                                            Submit for Review
                                         </button>
                                     </div>
                                 </form>

@@ -27,7 +27,7 @@ const Sidebar = () => {
         logOut()
             .then(() => {
                 Swal.fire({
-                    title: "Signed up successfully!",
+                    title: "Logged out successfully!",
                     icon: "success",
                     showConfirmButton: false,
                     timer: 1500
