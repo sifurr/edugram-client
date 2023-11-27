@@ -1,6 +1,10 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
 import useTeacherRequest from "../../../hooks/useTeacherRequest";
+import Swal from "sweetalert2";
+import useAxiosPublic from '../../../hooks/useAxiosPublic';
+
+
+   
 
 
 
@@ -9,7 +13,86 @@ const TeacherRequests = () => {
     const { data, refetch, isLoading } = useTeacherRequest();
     // category  email experience name photo requestMade requestedTime  title    
 
+    const axiosPublic = useAxiosPublic();
+
     console.log(data)
+
+    const handleApprove = teacherReq => {
+        Swal.fire({
+            title: "Approve user as a Teacher?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            cancelButtonText: "No",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosPublic.patch(`/api/v1/users/make-teacher/${teacherReq._id}`, null, { withCredentials: true })
+                    .then(res => {
+                        // console.log("make teacher res -->",res)
+                        if (res.data.success) {
+                            refetch();
+                            Swal.fire({
+                                title: `${teacherReq.name} is now a teacher`,
+                                text: "",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        } else {
+                            Swal.fire({
+                                title: res.data.message,
+                                icon: "error",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        }
+                    })
+            }
+        });
+
+        // console.log("teacher id: ", teacherReq._id)
+    }
+
+    const handleReject = teacherReq => {
+        Swal.fire({
+            title: "Reject user as a Teacher?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            cancelButtonText: "No",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosPublic.patch(`/api/v1/users/reject-teacher/${teacherReq._id}`, null, { withCredentials: true })
+                    .then(res => {
+                        if (res.data.success) {
+                            refetch();
+                            Swal.fire({
+                                title: `${teacherReq.name} is now in the pending list`,
+                                text: "",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        } else {
+                            Swal.fire({
+                                title: res.data.message,
+                                icon: "error",
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                        }
+                    })
+            }
+        });
+
+        // console.log("teacher id: ", teacherReq._id)
+    }
 
     return (
         <div>
@@ -59,7 +142,7 @@ const TeacherRequests = () => {
 
                                     <tr key={teacherReq._id}>
                                         <td className="whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
-                                        {idx + 1}
+                                            {idx + 1}
                                         </td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                             {teacherReq?.name}
@@ -75,10 +158,10 @@ const TeacherRequests = () => {
                                             {teacherReq?.category}
                                         </td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">{teacherReq?.approval}</td>
-                                        <td className="whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
-                                            <Link
+                                        <td className="whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300"> 
+                                            <button
                                                 className="group relative inline-block overflow-hidden border border-indigo-600 px-4 py-2 focus:outline-none focus:ring"
-                                                to="/"
+                                                onClick={()=>handleApprove(teacherReq)}
                                             >
                                                 <span
                                                     className="absolute inset-y-0 left-0 w-[2px] bg-indigo-600 transition-all group-hover:w-full group-active:bg-indigo-500"
@@ -88,23 +171,22 @@ const TeacherRequests = () => {
                                                 >
                                                     Approve
                                                 </span>
-                                            </Link>
+                                            </button>
                                         </td>
                                         <td className="whitespace-nowrap px-2 py-2 text-neutral-900">
-                                            <Link
+                                            <button
                                                 className="group relative inline-block overflow-hidden border border-red-600 px-4 py-2 focus:outline-none focus:ring"
-                                                to="/"
+                                                onClick={()=>handleReject(teacherReq)}
                                             >
                                                 <span
                                                     className="absolute inset-y-0 right-0 w-[2px] bg-red-600 transition-all group-hover:w-full group-active:bg-red-500"
                                                 ></span>
-
                                                 <span
                                                     className="relative text-sm font-medium text-red-600 transition-colors group-hover:text-white"
                                                 >
                                                     Reject
                                                 </span>
-                                            </Link>
+                                            </button>
                                         </td>
 
                                     </tr>
@@ -114,7 +196,7 @@ const TeacherRequests = () => {
                         </tbody>
                     </table>
                 </div>
-                
+
             </div>
         </div>
     );

@@ -4,8 +4,6 @@ import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 
 
-
-
 const Users = () => {
     const axiosPublic = useAxiosPublic();
     // console.log("is admin", isAdmin);
@@ -67,6 +65,26 @@ const Users = () => {
             </Helmet>
             <h2 className='text-3xl text-center mt-20 mb-10 uppercase'>All Users</h2>
 
+            {/* Search Button */}
+            <div className="mb-4 flex justify-center">
+                <form>
+
+                    <input
+                        type="text"
+                        name="searchText"
+                        placeholder="Search by username or email"
+                        className="px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-indigo-600 text-neutral-900"
+                        
+                    />
+                    <button
+                        className="ml-2 px-4 py-2 bg-indigo-600 text-white rounded-md focus:outline-none focus:ring"
+                        
+                    >
+                        Search
+                    </button>
+                </form>
+            </div>
+
             <div className="w-10/12 mx-auto rounded-lg border border-gray-200">
                 <div className="overflow-x-auto rounded-t-lg">
                     <table className="dark:bg-[#000927] bg-gray-50  min-w-full divide-y-2 divide-gray-200 text-xs">
@@ -83,7 +101,7 @@ const Users = () => {
                                 </th>
                                 <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                     Image
-                                </th>                               
+                                </th>
                                 <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                     Make Admin
                                 </th>
@@ -101,12 +119,12 @@ const Users = () => {
                                         <td className="text-center capitalize whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                             {userInfo?.name}
                                         </td>
-                                        <td className="text-center capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
+                                        <td className="text-center whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             {userInfo?.email}
                                         </td>
                                         <td className="flex justify-center capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             <img className="w-10 h-10 object-cover" src={userInfo?.photo} alt="teacher photo" />
-                                        </td>                                        
+                                        </td>
 
                                         <td className="whitespace-nowrap  px-2 py-2 text-center text-neutral-900 dark:text-neutral-300">
 
@@ -114,7 +132,7 @@ const Users = () => {
                                                 className={`group relative inline-block overflow-hidden border px-8 py-3 focus:outline-none focus:ring ${userInfo.role === 'admin' ? 'border-gray-400 cursor-not-allowed' : 'border-indigo-600'
                                                     }`}
                                                 onClick={() => handleMakeAdmin(userInfo)}
-                                                disabled={userInfo.role === 'admin'} 
+                                                disabled={userInfo.role === 'admin'}
                                             >
                                                 <span
                                                     className={`absolute inset-y-0 left-0 w-[2px] ${userInfo.role === 'admin' ? 'bg-gray-400' : 'bg-indigo-600'
