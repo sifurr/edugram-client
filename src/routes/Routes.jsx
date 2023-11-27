@@ -10,7 +10,7 @@ import TeachOn from "../pages/dashboard/TeachOn/TeachOn";
 import AdminRoute from "./AdminRoute";
 import TeacherRequests from "../pages/dashboard/TeacherRequests/TeacherRequests";
 import UpdateTeachOn from "../pages/dashboard/TeachOn/UpdateTeachOn";
-import TeacherRoute from "./TeacherRoute";
+import Users from "../pages/dashboard/Dashboard/Users/Users";
 
 
 
@@ -49,10 +49,14 @@ export const router = createBrowserRouter([
                 path: 'update-teacher-request',
                 element: <UpdateTeachOn/>
             },                     
-                                 
+            // admin routes  
             {
                 path: 'teacher-request',
                 element: <AdminRoute><TeacherRequests/> </AdminRoute>
+            },                     
+            {
+                path: 'users',
+                element: <AdminRoute><Users/> </AdminRoute>
             },                     
                                  
                      

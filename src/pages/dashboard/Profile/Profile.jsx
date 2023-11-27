@@ -13,7 +13,7 @@ const Profile = () => {
         return <Spinner/>
     }
 
-    // console.log("user info from profile--->",data);
+    console.log("user info from profile--->",data);
 
     return (
         <div className="w-1/3 min-h-screen flex items-center mx-auto">      

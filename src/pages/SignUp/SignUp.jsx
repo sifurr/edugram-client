@@ -31,6 +31,7 @@ const SignUp = () => {
                             email: data.email,
                             role: 'student',
                             phone: "",
+                            photo: data.photoURL,
                             teacherRequest: false
                         }
                         axiosPublic.post('/api/v1/users', userInfo)

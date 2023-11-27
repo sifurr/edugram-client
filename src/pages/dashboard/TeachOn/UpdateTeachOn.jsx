@@ -21,7 +21,6 @@ const UpdateTeachOn = () => {
                                         <p className="max-w-xl text-lg">
                                             Welcome to Edugram!
                                             <br />
-
                                         </p>
 
                                         <div className="mt-8">
