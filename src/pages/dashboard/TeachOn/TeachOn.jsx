@@ -1,5 +1,5 @@
-import { Helmet } from "react-helmet-async";                 
-import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import moment from 'moment';
@@ -11,6 +11,7 @@ const TeachOn = () => {
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
     const { user } = useAuth()
     const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
     // console.log(user.photoURL)
 
@@ -21,11 +22,11 @@ const TeachOn = () => {
         const experience = data.experience;
         const title = data.title;
         const category = data.category;
-        const requestMade = true;        
+        const approval = "pending";
         const requestedTime = moment().format("h:mm:ss a, D-M-YYYY");
-        const teacherRequestInfo = {name, email, photo, experience, title, category,requestMade, requestedTime}
+        const teacherRequestInfo = { name, email, photo, experience, title, category, approval, requestedTime }
 
-        axiosPublic.post('/api/v1/users/teacher-requests', teacherRequestInfo, {withCredentials:true})
+        axiosPublic.post('/api/v1/users/teacher-requests', teacherRequestInfo, { withCredentials: true })
             .then(res => {
                 if (res.data.insertedId) {
                     reset();
@@ -35,11 +36,13 @@ const TeachOn = () => {
                         icon: "success",
                         showConfirmButton: false,
                         timer: 1000
-                    });                    
+                    });
+
+                    // navigate("/dashboard/update-teacher-request")
                 }
             })
             .catch(err => {
-                console.log(err);
+                // console.log(err);
             })
 
     }
@@ -55,19 +58,9 @@ const TeachOn = () => {
                     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
                             <div className="lg:col-span-2 lg:py-12">
-                                <p className="max-w-xl text-lg">
+                                <p className="max-w-xl text-lg mt-[30%]">
                                     Welcome to Edugram! We appreciate your endeavour to share your knowledge with world.
                                 </p>
-
-                                <div className="mt-8">
-                                    <Link to="#" className="text-2xl font-bold text-pink-600">
-                                        000-000-000
-                                    </Link>
-
-                                    <address className="mt-2 not-italic">
-                                        220B Baker Street, London, England.
-                                    </address>
-                                </div>
                             </div>
 
                             <div className="rounded-lg dark:bg-[#000927] bg-gray-50 dark:border-2 dark:border-white p-8 shadow-xl lg:col-span-3 lg:p-12 text-neutral-900 dark:text-neutral-300">
@@ -116,7 +109,7 @@ const TeachOn = () => {
 
                                             <label
                                                 htmlFor="option1"
-                                                className="block w-full rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
+                                                className="block w-full rounded-lg border border-gray-200 p-3 text-neutral-900 dark:text-neutral-300 hover:border-indigo-600 peer-checked:border-indigo-600 peer-checked:bg-indigo-600 peer-checked:text-white"
                                                 tabindex="0"
                                             >
                                                 <span className="text-sm"> Beginner </span>
@@ -136,7 +129,7 @@ const TeachOn = () => {
 
                                             <label
                                                 htmlFor="option2"
-                                                className="block w-full rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
+                                                className="block w-full rounded-lg border border-gray-200 p-3 text-neutral-900 dark:text-neutral-300 hover:border-indigo-600 peer-checked:border-indigo-600 peer-checked:bg-indigo-600 peer-checked:text-white"
                                                 tabindex="0"
                                             >
                                                 <span className="text-sm"> Experienced </span>
@@ -156,7 +149,7 @@ const TeachOn = () => {
 
                                             <label
                                                 htmlFor="option3"
-                                                className="block w-full rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
+                                                className="block w-full rounded-lg border border-gray-200 p-3 text-neutral-900 dark:text-neutral-300 hover:border-indigo-600 peer-checked:border-indigo-600 peer-checked:bg-indigo-600 peer-checked:text-white"
                                                 tabindex="0"
                                             >
                                                 <span className="text-sm"> Some Idea </span>
@@ -200,12 +193,12 @@ const TeachOn = () => {
                                     </div>
 
                                     <div className="mt-4">
-                                        <button
+                                    <button
                                             type="submit"
                                             className="inline-block w-full rounded-lg bg-black dark:bg-white px-5 py-3 font-medium text-white dark:text-black  sm:w-auto"
                                         >
                                             Submit for Review
-                                        </button>
+                                        </button>                                        
                                     </div>
                                 </form>
                             </div>

@@ -1,11 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import Switcher from "../../../components/Switcher/Switcher"
 import {
+    BookCheck,
+    BookUp2,
     ChevronFirst,
     ChevronLast,
     Contact,
     LibrarySquare,
     LogOut,
+    Shield,
     User,
     Users
 } from "lucide-react";
@@ -14,10 +17,17 @@ import { useState } from "react";
 import logo from '../../../assets/edugram-logo.png'
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import Spinner from "../../../components/Spinner";
+import useUser from "../../../hooks/useUser";
 
 const Sidebar = () => {
     const { user, logOut } = useAuth();
-    const [sidebarOpen, setSidebarOpen] = useState(true)
+    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const { data, refetch, isLoading } = useUser([]);
+
+    if (isLoading) {
+        return <Spinner />
+    }
 
     const handleSidebar = () => {
         setSidebarOpen(!sidebarOpen)
@@ -65,34 +75,87 @@ const Sidebar = () => {
                 </div>
                 <ul className="flex flex-col items-center">
                     <div className="space-y-3">
-                        <li>
-                            <NavLink to="/teacher-request" className="flex gap-3">
-                                <Contact />
-                                <span
-                                    className={`${!sidebarOpen && "hidden"}`}>
-                                    Teacher Request
-                                </span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/users" className="flex gap-3">
-                                <Users />
-                                <span
-                                    className={`${!sidebarOpen && "hidden"}`}>
-                                    Users
-                                </span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/all-classes" className="flex gap-3">
-                                <LibrarySquare />
-                                <span
-                                    className={`${!sidebarOpen && "hidden"}`}>
-                                    All Classes
-                                </span>
-                            </NavLink>
 
-                        </li>
+                        {
+                            data?.user?.role === "student" &&
+                            <>
+                                <li>
+                                    <NavLink to="/dashboard/my-enroll-class" className="flex gap-3">
+                                        <Contact />
+                                        <span
+                                            className={`${!sidebarOpen && "hidden"}`}>
+                                            My Enroll Class
+                                        </span>
+                                    </NavLink>
+                                </li>
+
+                                <li>
+                                    <NavLink to="/dashboard/update-teacher-request" className="flex gap-3">
+                                        <Shield />
+                                        <span
+                                            className={`${!sidebarOpen && "hidden"}`}>
+                                            My Teaching Request
+                                        </span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        }
+                        {
+                            data?.user?.role === "teacher" &&
+                            <>
+                                <li>
+                                    <NavLink to="/dashboard/add-class" className="flex gap-3">
+                                        <BookUp2 />
+                                        <span
+                                            className={`${!sidebarOpen && "hidden"}`}>
+                                            Add Class
+                                        </span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/my-class" className="flex gap-3">
+                                        <BookCheck />
+                                        <span
+                                            className={`${!sidebarOpen && "hidden"}`}>
+                                            My Class
+                                        </span>
+                                    </NavLink>
+                                </li>                                
+                            </>
+                        }
+                        {
+                            data?.user?.role === "admin" &&
+                            <>
+                                <li>
+                                    <NavLink to="/dashboard/teacher-request" className="flex gap-3">
+                                        <Contact />
+                                        <span
+                                            className={`${!sidebarOpen && "hidden"}`}>
+                                            Teacher Request
+                                        </span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/users" className="flex gap-3">
+                                        <Users />
+                                        <span
+                                            className={`${!sidebarOpen && "hidden"}`}>
+                                            Users
+                                        </span>
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/all-classes" className="flex gap-3">
+                                        <LibrarySquare />
+                                        <span
+                                            className={`${!sidebarOpen && "hidden"}`}>
+                                            All Classes
+                                        </span>
+                                    </NavLink>
+
+                                </li>
+                            </>
+                        }
 
                         <li>
                             <NavLink to="/dashboard/profile" className="flex gap-3">
@@ -115,7 +178,7 @@ const Sidebar = () => {
                     </div>
 
                 </ul>
-            </div>
+            </div >
             <div className="mb-10">
                 <div className="flex gap-3 justify-center items-center">
                     <img className={!sidebarOpen ? 'w-8 h-8 object-cover' : 'w-10 h-10 object-cover'} src={user?.photoURL} alt="" />
@@ -125,7 +188,7 @@ const Sidebar = () => {
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav >
 
     );
 };

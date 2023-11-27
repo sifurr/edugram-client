@@ -4,14 +4,21 @@ import logo from '../../../assets/edugram-logo.png'
 import useAuth from '../../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import Switcher from '../../../components/Switcher/Switcher';
+import useAxiosPublic from '../../../hooks/useAxiosPublic';
 
 
 const Navbar = () => {
     const { user, logOut } = useAuth();
+    const axiosPublic = useAxiosPublic()
+
+    
 
     const handleLogout = () => {
         logOut()
             .then(() => {
+
+                clearToken();  
+
                 Swal.fire({
                     title: "Logged out successfully!",
                     icon: "success",
@@ -28,6 +35,12 @@ const Navbar = () => {
                 });
             })
     }
+
+
+    const clearToken = async () => {       
+          const response = await axiosPublic.post('/api/v1/auth/logout');
+          return response.data;      
+      };
 
     return (
         <nav className="relative  border-b-2 z-20 border-gray-300 dark:bg-[#000927] p-4 bg-gray-50 text-neutral-900 dark:text-neutral-300">
