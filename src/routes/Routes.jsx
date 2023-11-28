@@ -11,6 +11,8 @@ import AdminRoute from "./AdminRoute";
 import TeacherRequests from "../pages/dashboard/TeacherRequests/TeacherRequests";
 import UpdateTeachOn from "../pages/dashboard/TeachOn/UpdateTeachOn";
 import Users from "../pages/dashboard/Dashboard/Users/Users";
+import AddClass from "../pages/dashboard/Dashboard/AddClass/AddClass";
+import TeacherRoute from "./TeacherRoute";
 
 
 
@@ -48,7 +50,12 @@ export const router = createBrowserRouter([
             {
                 path: 'update-teacher-request',
                 element: <UpdateTeachOn/>
-            },                     
+            },  
+            // teacher routes
+            {
+                path:'add-class',
+                element: <TeacherRoute><AddClass/></TeacherRoute>
+            },                   
             // admin routes  
             {
                 path: 'teacher-request',

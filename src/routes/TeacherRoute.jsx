@@ -14,7 +14,7 @@ const TeacherRoute = ({children}) => {
     }
 
     if(user && isTeacher){
-        return children;
+        return children
     }
 
 
