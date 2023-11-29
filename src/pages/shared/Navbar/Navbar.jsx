@@ -17,7 +17,7 @@ const Navbar = () => {
         logOut()
             .then(() => {
 
-                clearToken();  
+                // clearToken();  
 
                 Swal.fire({
                     title: "Logged out successfully!",
@@ -37,10 +37,10 @@ const Navbar = () => {
     }
 
 
-    const clearToken = async () => {       
-          const response = await axiosPublic.post('/api/v1/auth/logout');
-          return response.data;      
-      };
+    // const clearToken = async () => {       
+    //       const response = await axiosPublic.post('/api/v1/auth/logout');
+    //       return response.data;      
+    //   };
 
     return (
         <nav className="relative  border-b-2 z-20 border-gray-300 dark:bg-[#000927] p-4 bg-gray-50 text-neutral-900 dark:text-neutral-300">

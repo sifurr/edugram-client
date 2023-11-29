@@ -111,7 +111,7 @@ const AllClassRequests = () => {
 
     const handleProgress = classReq => {
         console.log("progress clicked")
-        navigate(`/dashboard/class/${classReq._id}`)
+        navigate(`/dashboard/class-progress/${classReq._id}`)
     }
 
     return (

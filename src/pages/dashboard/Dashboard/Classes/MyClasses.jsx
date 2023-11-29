@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import useClass from "../../../../hooks/useClass";
 import Class from "./Class";
 
@@ -6,7 +7,10 @@ const MyClasses = () => {
     const { data, refetch, isLoading } = useClass();
     console.log("classes: ", data)
     return (
-        <div>
+        <div className="dark:bg-[#000927] bg-gray-50">
+            <Helmet>
+                <title>Edugram | My Class</title>
+            </Helmet>
             <h2 className="text-center text-2xl my-10 font-bold text-indigo-600 sm:text-3xl">
                 My Classes
             </h2>

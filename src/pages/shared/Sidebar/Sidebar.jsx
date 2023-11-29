@@ -9,6 +9,7 @@ import {
     LibrarySquare,
     LogOut,
     Shield,
+    ShoppingCart,
     User,
     Users
 } from "lucide-react";
@@ -85,6 +86,16 @@ const Sidebar = () => {
                                         <span
                                             className={`${!sidebarOpen && "hidden"}`}>
                                             My Enroll Class
+                                        </span>
+                                    </NavLink>
+                                </li>
+
+                                <li>
+                                    <NavLink to="/dashboard/cart" className="flex gap-3">
+                                        <ShoppingCart />
+                                        <span
+                                            className={`${!sidebarOpen && "hidden"}`}>
+                                            Cart
                                         </span>
                                     </NavLink>
                                 </li>

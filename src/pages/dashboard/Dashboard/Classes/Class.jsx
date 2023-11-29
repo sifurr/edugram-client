@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 
 
 const Class = ({ classInfo, refetch }) => {
+
+    const navigate = useNavigate();
 
     const axiosPublic = useAxiosPublic();
 
@@ -19,7 +21,7 @@ const Class = ({ classInfo, refetch }) => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 // const res = await axiosPublic.delete(`/menu/${item._id}`);
-                const res = await axiosPublic.delete(`/api/v1/users/classes/${item._id}`, {withCredentials: true});
+                const res = await axiosPublic.delete(`/api/v1/users/classes/${item._id}`, { withCredentials: true });
 
                 // console.log(res.data);
                 if (res.data.deletedCount > 0) {
@@ -38,6 +40,11 @@ const Class = ({ classInfo, refetch }) => {
 
     }
 
+    const handleProgress = classReq => {
+        console.log("progress clicked")
+        navigate(`/dashboard/my-class/${classReq._id}`)
+    }
+
 
     return (
         <div>
@@ -45,7 +52,7 @@ const Class = ({ classInfo, refetch }) => {
                 <button
                     className="absolute end-4 top-4 z-10 rounded-lg bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
                 >
-                    <span className="">${classInfo?.price}</span>                   
+                    <span className="">${classInfo?.price}</span>
                 </button>
 
                 <img
@@ -55,7 +62,7 @@ const Class = ({ classInfo, refetch }) => {
                 />
 
                 <div className="relative border border-gray-100 bg-white p-6">
-                    <div>                        
+                    <div>
                         <Link to={`/dashboard/update-class/${classInfo?._id}`}
                             className="group relative inline-block overflow-hidden border border-indigo-600 px-4 py-2 focus:outline-none focus:ring"
                         >
@@ -68,9 +75,9 @@ const Class = ({ classInfo, refetch }) => {
                                 Update
                             </span>
                         </Link>
-                      
+
                         <span
-                        onClick={()=> handleDeleteItem(classInfo)}
+                            onClick={() => handleDeleteItem(classInfo)}
                             className="ml-3 group relative inline-block overflow-hidden border border-red-600 px-4 py-2 focus:outline-none focus:ring"
                         >
                             <span
@@ -90,28 +97,28 @@ const Class = ({ classInfo, refetch }) => {
                     <p className="mt-1.5 text-sm text-gray-700 capitalize">Status: {classInfo?.status}</p>
                     <p className="mt-1.5 text-sm text-gray-700 capitalize">{classInfo?.description}</p>
 
-                    <form className="mt-4">  
-                        <button 
-                            className={`group relative inline-block overflow-hidden border px-8 py-3 focus:outline-none w-full focus:ring ${classInfo?.status === 'pending' ? 'border-gray-400 cursor-not-allowed' : 'border-indigo-600'
-                                }`}
-                            // onClick={() => handleMakeAdmin(classInfo)}
-                            disabled={classInfo?.status === 'pending'}
-                        >
-                            <span
-                                className={`absolute inset-y-0 left-0 w-[2px] ${classInfo?.status === 'pending' ? 'bg-gray-400' : 'bg-indigo-600'
-                                    } transition-all group-hover:w-full group-active:bg-indigo-500`}
-                            ></span>
 
-                            <span
-                                className={`relative text-sm font-medium ${classInfo?.status === 'pending'
-                                    ? 'text-gray-400'
-                                    : 'text-indigo-600 transition-colors group-hover:text-white'
-                                    }`}
-                            >
-                                Details
-                            </span>
-                        </button>
-                    </form>
+                    <button
+                        className={`group w-full capitalize relative inline-block overflow-hidden border px-8 py-3 focus:outline-none focus:ring ${classInfo?.status !== 'approved' ? 'border-gray-400 cursor-not-allowed' : 'border-indigo-600'
+                            }`}
+                        onClick={() => handleProgress(classInfo)}
+                        disabled={classInfo?.status !== 'approved'}
+                    >
+                        <span
+                            className={`absolute inset-y-0 left-0 w-[2px] ${classInfo?.status !== 'approved' ? 'bg-gray-400' : 'bg-indigo-600'
+                                } transition-all group-hover:w-full group-active:bg-indigo-500`}
+                        ></span>
+
+                        <span
+                            className={`relative text-sm font-medium ${classInfo?.status !== 'approved'
+                                ? 'text-gray-400'
+                                : 'text-indigo-600 transition-colors group-hover:text-white'
+                                }`}
+                        >
+                            Details
+                        </span>
+                    </button>
+
                 </div>
             </div>
         </div>

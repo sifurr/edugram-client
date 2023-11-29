@@ -16,11 +16,13 @@ import MyClasses from "../pages/dashboard/Dashboard/Classes/MyClasses";
 import DashboardLayout from "../layouts/DashboardLayout";
 import UpdateClass from "../pages/dashboard/Dashboard/Classes/UpdateClass/UpdateClass";
 import AllClassRequests from "../pages/dashboard/Dashboard/Classes/AllClassRequests";
-import ClassDetails from "../pages/dashboard/Dashboard/Classes/ClassProgressDetails";
 import AllClasses from "../pages/dashboard/Dashboard/Classes/AllClasses";
 import AddPhone from "../pages/dashboard/Profile/AddPhone";
-
-
+import MyClassProgressDetails from "../pages/dashboard/Dashboard/Classes/MyClassProgressDetails";
+import ClassDetails from "../pages/dashboard/Dashboard/Classes/ClassDetails";
+import ClassProgressDetails from "../pages/dashboard/Dashboard/Classes/ClassProgressDetails";
+import Payment from "../pages/dashboard/Payment/Payment";
+import Cart from "../pages/dashboard/Cart/Cart";
 
 
 export const router = createBrowserRouter([
@@ -35,6 +37,10 @@ export const router = createBrowserRouter([
             {
                 path: "classes",
                 element: <AllClasses/>
+            },           
+            {
+                path: "class/:id",
+                element: <PrivateRoute><ClassDetails/></PrivateRoute>
             },           
             {
                 path: "signup",
@@ -66,6 +72,14 @@ export const router = createBrowserRouter([
             {
                 path: 'update-teacher-request',
                 element: <UpdateTeachOn/>
+            },            
+            {
+                path: 'payment/:id',
+                element: <Payment/>
+            }, 
+            {
+                path: 'cart',
+                element: <Cart/>
             }, 
 
             // teacher routes
@@ -76,6 +90,10 @@ export const router = createBrowserRouter([
             {
                 path:'my-class',
                 element: <TeacherRoute><MyClasses/> </TeacherRoute>
+            },
+            {
+                path:'my-class/:id',
+                element: <TeacherRoute><MyClassProgressDetails/> </TeacherRoute>
             },
             {
                 path:'update-class/:id',
@@ -96,8 +114,9 @@ export const router = createBrowserRouter([
                 element: <AdminRoute><AllClassRequests /> </AdminRoute>
             },                     
             {
-                path: 'class/:id',
-                element: <AdminRoute><ClassDetails/> </AdminRoute>
+                path: 'class-progress/:id',
+                // TODO: need to add the component
+                element: <AdminRoute><ClassProgressDetails/> </AdminRoute>
             },                     
                                  
                      

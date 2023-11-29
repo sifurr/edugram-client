@@ -31,7 +31,7 @@ const Profile = () => {
                     />
 
                     <div>
-                        <h3 className="text-neutral-900 dark:text-neutral-300 text-lg font-medium">{user?.displayName}</h3>
+                        <h3 className="text-neutral-900 dark:text-neutral-300 text-lg font-medium capitalize">{user?.displayName}</h3>
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@ const Profile = () => {
                         >
                             <strong className="font-medium text-neutral-900 dark:text-neutral-300">Role</strong>
 
-                            <p className="mt-1 text-xs font-medium  text-neutral-900 dark:text-neutral-300">
+                            <p className="mt-1 capitalize text-xs font-medium  text-neutral-900 dark:text-neutral-300">
                                 {data.user?.role}
                             </p>
                         </span>
@@ -67,12 +67,7 @@ const Profile = () => {
                         >
                             <strong className="font-medium text-neutral-900 dark:text-neutral-300">Phone</strong>
 
-                            <p className="mt-1 text-xs font-medium  text-neutral-900 dark:text-neutral-300">
-                                {/* { !data.user?.phone == "" ? 
-                               
-                               data.user.phone 
-                               : 
-                               '000-000-000'} */}
+                            <p className="mt-1 text-xs font-medium  text-neutral-900 dark:text-neutral-300">                                
 
                                 {
                                     data.user?.phone == "" ?
@@ -87,7 +82,7 @@ const Profile = () => {
                                             <span
                                                 className="relative text-sm font-medium text-indigo-500 transition-colors group-hover:text-white"
                                             >
-                                                Add Phone
+                                               Add Phone
                                             </span>
                                         </Link>
 
