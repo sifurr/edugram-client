@@ -18,6 +18,7 @@ import UpdateClass from "../pages/dashboard/Dashboard/Classes/UpdateClass/Update
 import AllClassRequests from "../pages/dashboard/Dashboard/Classes/AllClassRequests";
 import ClassDetails from "../pages/dashboard/Dashboard/Classes/ClassProgressDetails";
 import AllClasses from "../pages/dashboard/Dashboard/Classes/AllClasses";
+import AddPhone from "../pages/dashboard/Profile/AddPhone";
 
 
 
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
             {
                 path: 'profile',
                 element: <Profile />
+            },                     
+            {
+                path: 'add-phone/:id',
+                element: <AddPhone/>
             },                     
             {
                 path: 'update-teacher-request',

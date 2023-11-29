@@ -1,4 +1,3 @@
-
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bg from "../../assets/signup-bg.png";
 import logo from '../../assets/edugram-logo.png';
@@ -22,7 +21,6 @@ const SignUp = () => {
 
         createUser(data.email, data.password)
             .then(res => {
-
                 setLoading(true)
                 updateNewUserProfile(data.name, data.photoURL)
                     .then(() => {
@@ -30,7 +28,7 @@ const SignUp = () => {
                             name: data.name,
                             email: data.email,
                             role: 'student',
-                            phone: "",
+                            phone: data.phone,
                             photo: data.photoURL,
                             teacherRequest: false
                         }
@@ -217,6 +215,24 @@ const SignUp = () => {
 
                             <div className="col-span-6 sm:col-span-3">
                                 <label
+                                    htmlFor="Phone"
+                                    className="block text-sm font-medium text-gray-700"
+                                >
+                                    Phone
+                                </label>
+
+                                <input
+                                    {...register("phone", { required: true })}
+
+                                    type="text"
+                                    id="Phone"
+                                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                                />
+                                {errors.phone && <span className="text-red-600 text-xs">Phone is required</span>}
+                            </div>
+
+                            <div className="col-span-6 sm:col-span-3">
+                                <label
                                     htmlFor="Password"
                                     className="block text-sm font-medium text-gray-700"
                                 >
@@ -247,7 +263,7 @@ const SignUp = () => {
                                 {errors.password?.type === "pattern" && (
                                     <p className="text-red-600 text-xs">Password must have one uppercase, one lowercase, one number, and one special character</p>
                                 )}
-                            </div>
+                            </div>                            
 
                             <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                                 <button
