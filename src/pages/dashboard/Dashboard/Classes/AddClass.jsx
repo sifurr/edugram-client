@@ -4,6 +4,7 @@ import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -13,6 +14,7 @@ const AddClass = () => {
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
+    const navigate = useNavigate();
 
   
 
@@ -36,7 +38,8 @@ const AddClass = () => {
                 email: user?.email,
                 price: parseFloat(data.price),
                 description: data.description,
-                image: res.data.data.display_url
+                image: res.data.data.display_url,
+                status: "pending"
             }
 
             // console.log(classInfo)
@@ -54,11 +57,11 @@ const AddClass = () => {
                             timer: 1000
                         });
 
-                        // navigate("/dashboard/update-teacher-request")
+                        navigate("/dashboard/my-class")
                     }
                 })
                 .catch(err => {
-                    // console.log(err);
+                    console.log(err);
                 })
         }
 
@@ -101,7 +104,7 @@ const AddClass = () => {
                                 <input
                                     {...register("name", { required: false })}
                                     type="text"
-                                    className="w-full rounded-lg text-neutral-900 border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                                    className="w-full rounded-lg bg-gray-300 text-neutral-900 border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                     placeholder="Your name"
                                     disabled
                                     defaultValue={user?.displayName}
@@ -116,12 +119,13 @@ const AddClass = () => {
                                 <input
                                     {...register("email", { required: false })}
                                     type="text"
-                                    className="w-full rounded-lg text-neutral-900 border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                                    className="w-full rounded-lg bg-gray-300 text-neutral-900 border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                     placeholder="Your Email"
                                     disabled
                                     defaultValue={user?.email}
 
                                 />
+                                
                                 {errors.email && <span className="text-xs text-red-500 ">Email is required</span>}
                             </div>
                         </div>
@@ -171,6 +175,7 @@ const AddClass = () => {
                                 id="formFile"
                                 
                                 />
+                                
                         </div>
 
 

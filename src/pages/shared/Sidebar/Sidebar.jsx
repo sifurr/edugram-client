@@ -145,7 +145,7 @@ const Sidebar = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/all-classes" className="flex gap-3">
+                                    <NavLink to="/dashboard/all-classes" className="flex gap-3">
                                         <LibrarySquare />
                                         <span
                                             className={`${!sidebarOpen && "hidden"}`}>

@@ -54,10 +54,10 @@ const Navbar = () => {
 
                 <ul className="flex">
                     <li className="hidden md:block hover:bg-[#000927] hover:text-white">
-                        <Link to="#" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">Home</Link>
+                        <Link to="/" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">Home</Link>
                     </li>
                     <li className="hidden md:block hover:bg-[#000927] hover:text-white">
-                        <Link to="#" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">All Classes</Link>
+                        <Link to="/classes" className="relative block py-6 px-2 lg:p-6 text-sm lg:text-base font-bold">All Classes</Link>
                     </li>
                     
                     {

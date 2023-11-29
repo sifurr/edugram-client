@@ -1,25 +1,34 @@
 import { Helmet } from "react-helmet-async";
-import useTeacherRequest from "../../../hooks/useTeacherRequest";
 import Swal from "sweetalert2";
-import useAxiosPublic from '../../../hooks/useAxiosPublic';
+import useAxiosPublic from "../../../../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 
-   
 
-
-
-const TeacherRequests = () => {
-
-    const { data, refetch } = useTeacherRequest();
-    // category  email experience name photo requestMade requestedTime  title   
+const AllClassRequests = () => {
 
     const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate()
 
-    console.log(data)
+    const { data, refetch } = useQuery({
+        queryKey: ['classRequests'],
+        queryFn: async () => {
+            const res = await axiosPublic.get("/api/v1/users/classes-requests", { withCredentials: true })
+            return res.data;
+        }
+    })
 
-    const handleApprove = teacherReq => {
+    console.log("all classes", data)
+
+    const handleApprove = classReq => {
+
+        const reqStatus = {
+            status: "approved"
+        }
+
         Swal.fire({
-            title: "Approve user as a Teacher?",
+            title: "Approve the class?",
             text: "",
             icon: "warning",
             showCancelButton: true,
@@ -27,15 +36,16 @@ const TeacherRequests = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes"
+
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.patch(`/api/v1/users/make-teacher/${teacherReq._id}`, null, { withCredentials: true })
+                axiosPublic.patch(`api/v1/users/class-status/${classReq._id}`, reqStatus, { withCredentials: true })
                     .then(res => {
                         // console.log("make teacher res -->",res)
-                        if (res.data.success) {
+                        if (res.data.modifiedCount > 0) {
                             refetch();
                             Swal.fire({
-                                title: `${teacherReq.name} is now a teacher`,
+                                title: `Class has been approved`,
                                 text: "",
                                 icon: "success",
                                 showConfirmButton: false,
@@ -53,12 +63,17 @@ const TeacherRequests = () => {
             }
         });
 
-        // console.log("teacher id: ", teacherReq._id)
+        // console.log("teacher id: ", classReq._id)
     }
 
-    const handleReject = teacherReq => {
+    const handleReject = classReq => {
+
+        const reqStatus = {
+            status: "rejected"
+        }
+
         Swal.fire({
-            title: "Reject user as a Teacher?",
+            title: "Reject the class?",
             text: "",
             icon: "warning",
             showCancelButton: true,
@@ -68,12 +83,12 @@ const TeacherRequests = () => {
             confirmButtonText: "Yes"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.patch(`/api/v1/users/reject-teacher/${teacherReq._id}`, null, { withCredentials: true })
+                axiosPublic.patch(`/api/v1/users/class-status/${classReq._id}`, reqStatus, { withCredentials: true })
                     .then(res => {
-                        if (res.data.success) {
+                        if (res.data.modifiedCount > 0) {
                             refetch();
                             Swal.fire({
-                                title: `${teacherReq.name} is now in the pending list`,
+                                title: `Class has been rejected`,
                                 text: "",
                                 icon: "success",
                                 showConfirmButton: false,
@@ -91,15 +106,20 @@ const TeacherRequests = () => {
             }
         });
 
-        // console.log("teacher id: ", teacherReq._id)
+        // console.log("teacher id: ", classReq._id)
+    }
+
+    const handleProgress = classReq => {
+        console.log("progress clicked")
+        navigate(`/dashboard/class/${classReq._id}`)
     }
 
     return (
         <div>
             <Helmet>
-                <title>Edugram | Teacher Requests</title>
+                <title>Edugram | All Classes Requests</title>
             </Helmet>
-            <h2 className='text-3xl text-center mt-20 mb-10'>Teacher Requests</h2>
+            <h2 className='text-3xl text-center mt-20 mb-10 capitalize'>Requests of All the Classes</h2>
 
             <div className="w-10/12 mx-auto rounded-lg border border-gray-200">
                 <div className="overflow-x-auto rounded-t-lg">
@@ -110,19 +130,16 @@ const TeacherRequests = () => {
                                     #
                                 </th>
                                 <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
-                                    Name
-                                </th>
-                                <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
-                                    Photo
-                                </th>
-                                <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
-                                    Experience
-                                </th>
-                                <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                     Title
                                 </th>
                                 <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
-                                    Category
+                                    Image
+                                </th>
+                                <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
+                                    Email
+                                </th>
+                                <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
+                                    Short Description
                                 </th>
                                 <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                     Status
@@ -133,41 +150,41 @@ const TeacherRequests = () => {
                                 <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                     Reject
                                 </th>
+                                <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
+                                    Progress
+                                </th>
                             </tr>
                         </thead>
 
                         <tbody className="divide-y divide-gray-200">
                             {
-                                data?.map((teacherReq, idx) =>
+                                data?.map((classReq, idx) =>
 
-                                    <tr key={teacherReq._id}>
+                                    <tr key={classReq._id}>
                                         <td className="whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                             {idx + 1}
                                         </td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
-                                            {teacherReq?.name}
+                                            {classReq?.title}
                                         </td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
-                                            <img className="w-10 h-10 object-cover" src={teacherReq?.photo} alt="teacher photo" />
+                                            <img className="w-10 h-10 object-cover" src={classReq?.image} alt="teacher photo" />
                                         </td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
-                                            {teacherReq?.experience}
+                                            {classReq?.email}
                                         </td>
-                                        <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">{teacherReq?.title}</td>
-                                        <td className="capitalize whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
-                                            {teacherReq?.category}
-                                        </td>
-                                        <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">{teacherReq?.approval}</td>
-                                        <td className="whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300"> 
+                                        <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">{classReq?.description}</td>
+                                        <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300 ">{classReq?.status}</td>
+                                        <td className="whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             <button
-                                                className="group relative inline-block overflow-hidden border border-indigo-600 px-4 py-2 focus:outline-none focus:ring"
-                                                onClick={()=>handleApprove(teacherReq)}
+                                                className="group relative inline-block overflow-hidden border border-green-500 px-4 py-2 focus:outline-none focus:ring"
+                                                onClick={() => handleApprove(classReq)}
                                             >
                                                 <span
-                                                    className="absolute inset-y-0 left-0 w-[2px] bg-indigo-600 transition-all group-hover:w-full group-active:bg-indigo-500"
+                                                    className="absolute inset-y-0 left-0 w-[2px] bg-green-500 transition-all group-hover:w-full group-active:bg-green-500"
                                                 ></span>
                                                 <span
-                                                    className="relative text-sm font-medium text-indigo-600 transition-colors group-hover:text-white"
+                                                    className="relative text-sm font-medium text-green-500 transition-colors group-hover:text-white"
                                                 >
                                                     Approve
                                                 </span>
@@ -176,7 +193,7 @@ const TeacherRequests = () => {
                                         <td className="whitespace-nowrap px-2 py-2 text-neutral-900">
                                             <button
                                                 className="group relative inline-block overflow-hidden border border-red-600 px-4 py-2 focus:outline-none focus:ring"
-                                                onClick={()=>handleReject(teacherReq)}
+                                                onClick={() => handleReject(classReq)}
                                             >
                                                 <span
                                                     className="absolute inset-y-0 right-0 w-[2px] bg-red-600 transition-all group-hover:w-full group-active:bg-red-500"
@@ -185,6 +202,28 @@ const TeacherRequests = () => {
                                                     className="relative text-sm font-medium text-red-600 transition-colors group-hover:text-white"
                                                 >
                                                     Reject
+                                                </span>
+                                            </button>
+                                        </td>
+                                        <td className="whitespace-nowrap px-2 py-2 text-neutral-900">
+                                            <button
+                                                className={`group capitalize relative inline-block overflow-hidden border px-8 py-3 focus:outline-none focus:ring ${classReq?.status !== 'approved' ? 'border-gray-400 cursor-not-allowed' : 'border-indigo-600'
+                                                    }`}
+                                                onClick={() => handleProgress(classReq)}
+                                                disabled={classReq?.status !== 'approved'}
+                                            >
+                                                <span
+                                                    className={`absolute inset-y-0 left-0 w-[2px] ${classReq?.status !== 'approved' ? 'bg-gray-400' : 'bg-indigo-600'
+                                                        } transition-all group-hover:w-full group-active:bg-indigo-500`}
+                                                ></span>
+
+                                                <span
+                                                    className={`relative text-sm font-medium ${classReq?.status !== 'approved'
+                                                        ? 'text-gray-400'
+                                                        : 'text-indigo-600 transition-colors group-hover:text-white'
+                                                        }`}
+                                                >
+                                                    See Progress
                                                 </span>
                                             </button>
                                         </td>
@@ -202,4 +241,4 @@ const TeacherRequests = () => {
     );
 };
 
-export default TeacherRequests;
+export default AllClassRequests;
