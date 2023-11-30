@@ -18,7 +18,7 @@ const AllClasses = () => {
     // console.log("all classes: ", data);
 
     return (
-        <div className="dark:bg-[#000927] bg-gray-50 text-neutral-900 dark:text-neutral-300">
+        <div className="bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300 px-20">
              <Helmet>
                 <title>Edugram | All Classes</title>
             </Helmet>

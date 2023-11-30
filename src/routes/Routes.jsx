@@ -23,6 +23,8 @@ import ClassDetails from "../pages/dashboard/Dashboard/Classes/ClassDetails";
 import ClassProgressDetails from "../pages/dashboard/Dashboard/Classes/ClassProgressDetails";
 import Payment from "../pages/dashboard/Payment/Payment";
 import Cart from "../pages/dashboard/Cart/Cart";
+import MyEnroll from "../pages/dashboard/Dashboard/MyEnroll/MyEnroll";
+
 
 
 export const router = createBrowserRouter([
@@ -80,6 +82,10 @@ export const router = createBrowserRouter([
             {
                 path: 'cart',
                 element: <Cart/>
+            }, 
+            {
+                path: 'my-enroll-class',
+                element: <MyEnroll/>
             }, 
 
             // teacher routes

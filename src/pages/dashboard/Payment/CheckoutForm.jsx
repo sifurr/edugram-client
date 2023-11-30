@@ -105,23 +105,24 @@ const CheckoutForm = () => {
                     });
                 }
 
-                navigate("/dashboard/profile");
+                navigate("/dashboard/my-enroll-class");
             }
         }
     }
 
     return (
         <div>
-            <h2 className='text-3xl text-center'>Pay with your card</h2>
+            <h2 className='text-3xl text-center mb-3 normal-case'>Pay with your card</h2>
             <form onSubmit={handleSubmit}>
-                <CardElement
+                <CardElement className="border border-black dark:border-white bg-white h-full placeholder:text-black"
                     options={{
                         style: {
                             base: {
-                                fontSize: '16px',
-                                color: '#424770',
+                                lineHeight: '2',
+                                fontSize: '18px',
+                                color: '#000000',                                
                                 '::placeholder': {
-                                    color: '#aab7c4',
+                                    color: '#000000',
                                 },
                             },
                             invalid: {

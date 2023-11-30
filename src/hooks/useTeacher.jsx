@@ -15,7 +15,7 @@ const useTeacher = () => {
             return res.data?.teacher;
         }
     })
-    console.log("is teacher", isTeacher)
+    // console.log("is teacher", isTeacher)
     return [isTeacher, isTeacherLoading];
 };
 

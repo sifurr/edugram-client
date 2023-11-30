@@ -8,7 +8,7 @@ const UpdateTeachOn = () => {
     // console.log("My teaching req: ----> ", data)   
 
     return (
-        <div className="dark:bg-[#000927] bg-gray-50 text-neutral-900 dark:text-neutral-300">
+        <div className="bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300">
             <Helmet>
                 <title>Edugram | My Request</title>
             </Helmet>

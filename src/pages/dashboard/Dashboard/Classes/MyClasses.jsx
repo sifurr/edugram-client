@@ -5,9 +5,9 @@ import Class from "./Class";
 
 const MyClasses = () => {
     const { data, refetch, isLoading } = useClass();
-    console.log("classes: ", data)
+    // console.log("classes: ", data)
     return (
-        <div className="dark:bg-[#000927] bg-gray-50">
+        <div className="bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300">
             <Helmet>
                 <title>Edugram | My Class</title>
             </Helmet>

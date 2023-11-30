@@ -48,7 +48,7 @@ const Class = ({ classInfo, refetch }) => {
 
     return (
         <div>
-            <div className="relative block overflow-hidden">
+            <div className="relative block overflow-hidden drop-shadow-lg">
                 <button
                     className="absolute end-4 top-4 z-10 rounded-lg bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
                 >

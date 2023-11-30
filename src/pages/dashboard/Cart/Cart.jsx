@@ -36,7 +36,7 @@ const Cart = () => {
     }
 
     return (
-        <div className="dark:bg-[#000927] bg-gray-50 text-neutral-900 dark:text-neutral-300">
+        <div className="bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300">
             <section>
                 <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
                     <div className="mx-auto max-w-3xl">
@@ -56,7 +56,7 @@ const Cart = () => {
                                             />
 
                                             <div>
-                                                <h3 className="text-sm text-neutral-900 dark:text-neutral-300 capitalize">{cartItem?.title}</h3>                                               
+                                                <h3 className="text-sm text-neutral-900 dark:text-neutral-300 capitalize">{cartItem?.title}</h3>
                                             </div>
 
                                             <div className="flex flex-1 items-center justify-end gap-2">
@@ -64,7 +64,7 @@ const Cart = () => {
                                                     <label htmlFor="Line1Qty" className="sr-only"> Price </label>
 
                                                     <input
-                                                        type="text"          
+                                                        type="text"
                                                         value={`$${cartItem?.price}`}
                                                         id="Line1Qty"
                                                         className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-neutral-900 dark:text-neutral-900 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none
@@ -73,7 +73,7 @@ const Cart = () => {
                                                     />
                                                 </form>
 
-                                                <button onClick={()=>handleDelete(cartItem._id)} className="text-gray-600 transition hover:text-red-600">
+                                                <button onClick={() => handleDelete(cartItem._id)} className="text-gray-600 transition hover:text-red-600">
                                                     <span className="sr-only">Remove item</span>
 
                                                     <svg
@@ -99,7 +99,7 @@ const Cart = () => {
 
                             </ul>
 
-                            <div className="mt-8 flex justify-end border-t border-gray-100 pt-8">
+                            <div className="mt-8 flex justify-end border-t border-gray-900 dark:border-gray-100 pt-8">
                                 <div className="w-screen max-w-lg space-y-4">
 
                                     <dl className="space-y-0.5 text-sm text-gray-700">
@@ -110,11 +110,9 @@ const Cart = () => {
                                         </div>
                                     </dl>
 
-                                    
-
                                     <div>
                                         <Payment />
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </div>
                         </div>

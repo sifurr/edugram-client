@@ -48,7 +48,7 @@ const TeachOn = () => {
     }
     // console.log("is admin--->", isAdmin);
     return (
-        <div className="dark:bg-[#000927] bg-gray-50 text-neutral-900 dark:text-neutral-300">
+        <div className="bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300">
             <Helmet>
                 <title>Edugram | Teach On</title>
             </Helmet>
@@ -63,7 +63,7 @@ const TeachOn = () => {
                                 </p>
                             </div>
 
-                            <div className="rounded-lg dark:bg-[#000927] bg-gray-50 dark:border-2 dark:border-white p-8 shadow-xl lg:col-span-3 lg:p-12 text-neutral-900 dark:text-neutral-300">
+                            <div className="rounded-lg bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300 dark:border-2 dark:border-white p-8 shadow-xl lg:col-span-3 lg:p-12">
                                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
                                     <div>
                                         <label className="" htmlFor="">Name</label>

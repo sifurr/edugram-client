@@ -17,7 +17,7 @@ const Navbar = () => {
         logOut()
             .then(() => {
 
-                // clearToken();  
+                clearToken();  
 
                 Swal.fire({
                     title: "Logged out successfully!",
@@ -37,18 +37,18 @@ const Navbar = () => {
     }
 
 
-    // const clearToken = async () => {       
-    //       const response = await axiosPublic.post('/api/v1/auth/logout');
-    //       return response.data;      
-    //   };
+    const clearToken = async () => {       
+          const response = await axiosPublic.post('/api/v1/auth/logout');
+          return response.data;      
+      };
 
     return (
-        <nav className="relative  border-b-2 z-20 border-gray-300 dark:bg-[#000927] p-4 bg-gray-50 text-neutral-900 dark:text-neutral-300">
+        <nav className="relative  border-b-2 z-20 border-gray-300 p-4 bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300">
             <div className="container mx-auto flex justify-between">
                 <div className="relative block p-4 lg:p-6">
                     <div className=' flex items-center gap-3'>
                         <img className='w-10 dark:bg-white rounded-full' src={logo} alt="Edugram Logo" />
-                        <span className='text-2xl text-[#000927] font-bold'>Edugram</span>
+                        <span className='text-2xl  font-bold'>Edugram</span>
                     </div>
                 </div>
 
