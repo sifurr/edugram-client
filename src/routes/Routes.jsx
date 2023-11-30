@@ -28,6 +28,7 @@ import MyEnrollClassDetails from "../pages/dashboard/Dashboard/Classes/MyEnrollC
 
 
 
+
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -97,7 +98,8 @@ export const router = createBrowserRouter([
             {
                 path:'add-class',
                 element: <TeacherRoute><AddClass/></TeacherRoute>
-            },                   
+            },                  
+                              
             {
                 path:'my-class',
                 element: <TeacherRoute><MyClasses/> </TeacherRoute>

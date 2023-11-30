@@ -12,9 +12,7 @@ import toast from "react-hot-toast";
 
 
 const MyEnrollClassDetails = () => {
-    const { id } = useParams();
-
-    const data = [];
+    const { id } = useParams();    
     const [isModalOpen, setModalOpen] = useState(false);
     const [ratingStar, setRatingStart] = useState(0)
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
@@ -28,15 +26,23 @@ const MyEnrollClassDetails = () => {
             return res.data;
         }
     })
+    // console.log("myEnrollClass", myEnrollClass);
 
-    console.log("myEnrollClass", myEnrollClass);
+    const { data: myAssignments = [] } = useQuery({
+        queryKey: ["myAssignments"],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/api/v1/users/class-assignments/${id}`, { withCredentials: true })
+            return res.data;
+        }
+    })
+    // console.log("myAssignments", myAssignments);
 
     const toggleModal = () => {
         setModalOpen(!isModalOpen);
     };
 
     const ratingChanged = (newRating) => {
-        console.log(newRating);
+        // console.log(newRating);
         setRatingStart(parseInt(newRating));
     };
 
@@ -67,10 +73,35 @@ const MyEnrollClassDetails = () => {
 
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                // console.log(err)
+            })
     }
 
-    console.log(ratingStar)
+    // console.log(ratingStar)
+
+    const handleAssignmentSubmit = () => {
+        const submission = {
+            classId: id,
+            studentName: user?.displayName,
+            studentEmail: user?.email,           
+            classTitle: myEnrollClass?.title,
+            teacherName: myEnrollClass?.name,
+            teacherEmail: myEnrollClass?.email, 
+            submissionTime: moment().format("h:mm:ss a, D-M-YYYY")
+        }
+
+        axiosPublic.post(`/api/v1/users/assignments-submissions`, submission ,{withCredentials:true})
+        .then(res => {
+            if (res.data.insertedId) {
+                reset();
+                toast.success("You submitted assignment successfully!") 
+            }
+        })
+        .catch(err => {
+            // console.log(err)
+        })
+    }
 
 
     return (
@@ -204,7 +235,7 @@ const MyEnrollClassDetails = () => {
 
                         <tbody className="divide-y divide-gray-200">
                             {
-                                data?.map((assignment, idx) =>
+                                myAssignments?.map((assignment, idx) =>
 
                                     <tr key={assignment._id}>
                                         <td className="whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
@@ -216,12 +247,13 @@ const MyEnrollClassDetails = () => {
                                         <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             {assignment?.description}
                                         </td>
-                                        <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">{assignment?.deadline}</td>
+                                        <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
+                                            {assignment?.deadline}</td>
 
                                         <td className="whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             <button
                                                 className="group relative inline-block overflow-hidden border border-indigo-600 px-4 py-2 focus:outline-none focus:ring"
-                                            // onClick={()=>handleSubmit(assignment)}
+                                            onClick={handleAssignmentSubmit}
                                             >
                                                 <span
                                                     className="absolute inset-y-0 left-0 w-[2px] bg-indigo-600 transition-all group-hover:w-full group-active:bg-indigo-500"
