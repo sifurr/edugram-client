@@ -1,19 +1,20 @@
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import moment from 'moment';
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useMyTeachingRequest from "../../../hooks/useMyTeachingRequest";
 
 
 const TeachOn = () => {
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
     const { user } = useAuth()
     const axiosPublic = useAxiosPublic();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+    const {data} = useMyTeachingRequest()
 
-    // console.log(user.photoURL)
+    // console.log(data)
 
     const onSubmit = async (data) => {
         const name = data.name;
@@ -197,7 +198,10 @@ const TeachOn = () => {
                                             type="submit"
                                             className="inline-block w-full rounded-lg bg-black dark:bg-white px-5 py-3 font-medium text-white dark:text-black  sm:w-auto"
                                         >
-                                            Submit for Review
+                                        {
+                                            data?.approval === 'pending' ? "Submit another review"
+                                            :  "Submit for Review"
+                                        }
                                         </button>                                        
                                     </div>
                                 </form>
