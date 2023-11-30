@@ -95,7 +95,7 @@ const TeacherRequests = () => {
     }
 
     return (
-        <div>
+        <div className="bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300">
             <Helmet>
                 <title>Edugram | Teacher Requests</title>
             </Helmet>
@@ -103,7 +103,7 @@ const TeacherRequests = () => {
 
             <div className="w-10/12 mx-auto rounded-lg border border-gray-200">
                 <div className="overflow-x-auto rounded-t-lg">
-                    <table className="dark:bg-[#000927] bg-gray-50  min-w-full divide-y-2 divide-gray-200 text-xs">
+                    <table className="bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300  min-w-full divide-y-2 divide-gray-200 text-xs">
                         <thead className="ltr:text-left rtl:text-right ">
                             <tr >
                                 <th className="text-neutral-900 dark:text-neutral-300 whitespace-nowrap px-4 py-2 font-medium">

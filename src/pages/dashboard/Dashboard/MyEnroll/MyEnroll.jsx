@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useMyEnrolledClass from "../../../../hooks/useMyEnrolledClass";
 import { Helmet } from "react-helmet-async";
 
@@ -44,7 +45,8 @@ const MyEnroll = () => {
 
                                     <div className="mt-12 text-center">
 
-                                        <button
+                                        <Link 
+                                        to={`/dashboard/myenroll-class/${classInfo._id}`}
                                             className="group relative inline-block overflow-hidden border border-indigo-500 px-4 py-2 focus:outline-none focus:ring"
 
                                         >
@@ -56,7 +58,7 @@ const MyEnroll = () => {
                                             >
                                                 Continue
                                             </span>
-                                        </button>
+                                        </Link>
                                     </div>
 
                                 </div>
