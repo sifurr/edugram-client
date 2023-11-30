@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 
 
 const MyEnrollClassDetails = () => {
-    const { id } = useParams();    
+    const { id } = useParams();
     const [isModalOpen, setModalOpen] = useState(false);
     const [ratingStar, setRatingStart] = useState(0)
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
@@ -69,7 +69,7 @@ const MyEnrollClassDetails = () => {
                 if (res.data.insertedId) {
 
                     reset();
-                    toast.success("Thanks for your feedback!")                   
+                    toast.success("Thanks for your feedback!")
 
                 }
             })
@@ -84,23 +84,23 @@ const MyEnrollClassDetails = () => {
         const submission = {
             classId: id,
             studentName: user?.displayName,
-            studentEmail: user?.email,           
+            studentEmail: user?.email,
             classTitle: myEnrollClass?.title,
             teacherName: myEnrollClass?.name,
-            teacherEmail: myEnrollClass?.email, 
+            teacherEmail: myEnrollClass?.email,
             submissionTime: moment().format("h:mm:ss a, D-M-YYYY")
         }
 
-        axiosPublic.post(`/api/v1/users/assignments-submissions`, submission ,{withCredentials:true})
-        .then(res => {
-            if (res.data.insertedId) {
-                reset();
-                toast.success("You submitted assignment successfully!") 
-            }
-        })
-        .catch(err => {
-            // console.log(err)
-        })
+        axiosPublic.post(`/api/v1/users/assignments-submissions`, submission, { withCredentials: true })
+            .then(res => {
+                if (res.data.insertedId) {
+                    reset();
+                    toast.success("You submitted assignment successfully!")
+                }
+            })
+            .catch(err => {
+                // console.log(err)
+            })
     }
 
 
@@ -217,10 +217,10 @@ const MyEnrollClassDetails = () => {
                                 <th className="text-neutral-900 dark:text-neutral-300 whitespace-nowrap px-4 py-2 font-medium">
                                     #
                                 </th>
-                                <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
+                                <th className="capitalize text-left whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                     Title
                                 </th>
-                                <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
+                                <th className="capitalize text-left whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                     Description
                                 </th>
                                 <th className="capitalize whitespace-nowrap px-4 py-2 font-medium text-neutral-900 dark:text-neutral-300">
@@ -241,19 +241,20 @@ const MyEnrollClassDetails = () => {
                                         <td className="whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                             {idx + 1}
                                         </td>
-                                        <td className="capitalize whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
+                                        <td className="capitalize text=center whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
                                             {assignment?.title}
                                         </td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             {assignment?.description}
                                         </td>
-                                        <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
+                                        <td className="capitalize text-center whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             {assignment?.deadline}</td>
 
-                                        <td className="whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
+                                        <td className="whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300 text-center">
                                             <button
+
                                                 className="group relative inline-block overflow-hidden border border-indigo-600 px-4 py-2 focus:outline-none focus:ring"
-                                            onClick={handleAssignmentSubmit}
+                                                onClick={handleAssignmentSubmit}
                                             >
                                                 <span
                                                     className="absolute inset-y-0 left-0 w-[2px] bg-indigo-600 transition-all group-hover:w-full group-active:bg-indigo-500"
