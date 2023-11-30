@@ -53,8 +53,10 @@ const TeachOn = () => {
             <Helmet>
                 <title>Edugram | Teach On</title>
             </Helmet>
-            <h2 className='text-3xl text-center'>Teach On Edugram</h2>
+            <h2 className='text-3xl text-center pt-10'>Teach On Edugram</h2>
             <div>
+                {
+                    data?.approval === "pending" ? 
                 <section>
                     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
@@ -209,6 +211,11 @@ const TeachOn = () => {
                         </div>
                     </div>
                 </section>
+                :
+                <section className="min-h-screen text-center text-xl bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300">
+                    <p className="my-[10%]">You are already a teacher! You do not need to apply again.</p>
+                </section>
+                }
             </div >
         </div >
     );
