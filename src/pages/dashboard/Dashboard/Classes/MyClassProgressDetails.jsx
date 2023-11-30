@@ -10,24 +10,12 @@ import { useQuery } from "@tanstack/react-query";
 
 
 const MyClassProgressDetails = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const { register, formState: { errors }, reset, handleSubmit } = useForm();
     const [isModalOpen, setModalOpen] = useState(false);
     const axiosPublic = useAxiosPublic();
 
-
-
-    // const {data} = useQuery({
-    //     queryKey: ["myClassProgressDetails"],
-    //     queryFn: async () =>{
-    //         const res = await axiosPublic.get(`/api/v1/users/classes/${id}`, {withCredentials:true})
-    //         return res.data;
-    //     }
-    // })
-
-    console.log("id", id)
-
-    // console.log("My class progress details: ", data);
+    
 
     const toggleModal = () => {
         setModalOpen(!isModalOpen);
@@ -43,7 +31,7 @@ const MyClassProgressDetails = () => {
             assignmentCreatedTime: moment().format("h:mm:ss a, D-M-YYYY")
         }
 
-        console.log(assignmentContent)
+        // console.log(assignmentContent)
 
         // console.log("student feedback", assignmentContent)
 
@@ -60,15 +48,34 @@ const MyClassProgressDetails = () => {
     }
 
 
-    const {data:assignmentSubmissions} = useQuery({
-        queryKey: ["assignmentSubmissions"],
-        queryFn: async () =>{
-            const res = await axiosPublic.get(`/api/v1/users/assignments-submissions/${id}`, {withCredentials:true})
+    const { data: numberOfEnrollments } = useQuery({
+        queryKey: ["numberOfEnrollments"],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/api/v1/payments/${id}`, { withCredentials: true })
             return res.data;
         }
     })
 
-    console.log("assignmentSubmissions --->",assignmentSubmissions);
+    // console.log("numberOfEnrollments --->", numberOfEnrollments);
+
+    const { data: assignmentSubmissions } = useQuery({
+        queryKey: ["assignmentSubmissions"],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/api/v1/users/assignments-submissions/${id}`, { withCredentials: true })
+            return res.data;
+        }
+    })
+
+    // console.log("assignmentSubmissions --->", assignmentSubmissions);
+    
+    const { data: numberOfAssignments={} } = useQuery({
+        queryKey: ["numberOfAssignments"],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/api/v1/users/total-class-assignments/${id}`, { withCredentials: true })
+            return res.data;
+        }
+    })
+    // console.log("numberOfAssignments --->", numberOfAssignments?.totalAssignments);
 
 
     return (
@@ -105,7 +112,7 @@ const MyClassProgressDetails = () => {
                                     <dd
                                         className="text-4xl font-extrabold text-blue-600 dark:text-blue-50 md:text-5xl"
                                     >
-                                        80
+                                        {numberOfEnrollments?.totalEnrollments}
                                     </dd>
                                 </div>
 
@@ -121,7 +128,7 @@ const MyClassProgressDetails = () => {
                                     <dd
                                         className="text-4xl font-extrabold text-blue-600 dark:text-blue-50 md:text-5xl"
                                     >
-                                        6
+                                        {numberOfAssignments?.totalAssignments}
                                     </dd>
                                 </div>
 
@@ -150,7 +157,7 @@ const MyClassProgressDetails = () => {
                         data-modal-toggle="crud-modal"
                         onClick={toggleModal}
                         className="group flex items-center justify-between gap-4 rounded-lg border border-indigo-600 bg-indigo-600 px-5 py-3 transition-colors hover:bg-transparent focus:outline-none focus:ring"
-                        
+
                     >
                         <span
                             className="font-medium text-white transition-colors group-hover:text-indigo-600 group-active:text-indigo-500"
@@ -166,7 +173,7 @@ const MyClassProgressDetails = () => {
                         </span>
                     </Link>
 
-                    <div>                       
+                    <div>
 
                         {/* modal */}
                         <div className="flex justify-center items-center ">
