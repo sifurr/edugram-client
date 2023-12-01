@@ -2,9 +2,10 @@ import { Helmet } from "react-helmet-async";
 import useTeacherRequest from "../../../hooks/useTeacherRequest";
 import Swal from "sweetalert2";
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
+import { Tooltip } from 'flowbite-react';
 
 
-   
+
 
 
 
@@ -145,23 +146,33 @@ const TeacherRequests = () => {
                                             {idx + 1}
                                         </td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
-                                            {teacherReq?.name}
+                                            <Tooltip content={`Teacher name is ${teacherReq?.name}`}>
+                                                {teacherReq?.name}
+
+                                            </Tooltip>
                                         </td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             <img className="w-10 h-10 object-cover" src={teacherReq?.photo} alt="teacher photo" />
                                         </td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
-                                            {teacherReq?.experience}
+                                            <Tooltip content={`Experience level is ${teacherReq?.experience}`}>
+                                                {teacherReq?.experience}
+                                            </Tooltip>
                                         </td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">{teacherReq?.title}</td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
+                                            <Tooltip content={`Category is ${teacherReq?.category}`}>
                                             {teacherReq?.category}
+                                            </Tooltip>
                                         </td>
-                                        <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">{teacherReq?.approval}</td>
-                                        <td className="whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300"> 
+                                        <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">{teacherReq?.approval}
+                                        <Tooltip content={`Status is ${teacherReq?.approval}`}>
+                                            </Tooltip>
+                                        </td>
+                                        <td className="whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             <button
                                                 className="group relative inline-block overflow-hidden border border-indigo-600 px-4 py-2 focus:outline-none focus:ring"
-                                                onClick={()=>handleApprove(teacherReq)}
+                                                onClick={() => handleApprove(teacherReq)}
                                             >
                                                 <span
                                                     className="absolute inset-y-0 left-0 w-[2px] bg-indigo-600 transition-all group-hover:w-full group-active:bg-indigo-500"
@@ -176,7 +187,7 @@ const TeacherRequests = () => {
                                         <td className="whitespace-nowrap px-2 py-2 text-neutral-900">
                                             <button
                                                 className="group relative inline-block overflow-hidden border border-red-600 px-4 py-2 focus:outline-none focus:ring"
-                                                onClick={()=>handleReject(teacherReq)}
+                                                onClick={() => handleReject(teacherReq)}
                                             >
                                                 <span
                                                     className="absolute inset-y-0 right-0 w-[2px] bg-red-600 transition-all group-hover:w-full group-active:bg-red-500"

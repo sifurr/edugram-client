@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import { Tooltip } from "flowbite-react";
 
 
 const Users = () => {
@@ -74,11 +75,11 @@ const Users = () => {
                         name="searchText"
                         placeholder="Search by username or email"
                         className="px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-indigo-600 text-neutral-900"
-                        
+
                     />
                     <button
                         className="ml-2 px-4 py-2 bg-indigo-600 text-white rounded-md focus:outline-none focus:ring"
-                        
+
                     >
                         Search
                     </button>
@@ -117,10 +118,14 @@ const Users = () => {
                                             {idx + 1}
                                         </td>
                                         <td className="text-center capitalize whitespace-nowrap px-2 py-2 font-medium text-neutral-900 dark:text-neutral-300">
-                                            {userInfo?.name}
+                                            <Tooltip content={`${userInfo?.name}`}>
+                                            {userInfo?.name}                                          
+                                            </Tooltip>
                                         </td>
                                         <td className="text-center whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
-                                            {userInfo?.email}
+                                            <Tooltip content={`${userInfo?.email}`}>
+                                                {userInfo?.email}
+                                            </Tooltip>
                                         </td>
                                         <td className="flex justify-center capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             <img className="w-10 h-10 object-cover" src={userInfo?.photo} alt="teacher photo" />

@@ -53,9 +53,12 @@ const Navbar = () => {
             <div className="container mx-auto flex justify-between items-center">
                 <div className="flex items-center">
                     <img className="w-10 h-10 dark:bg-neutral-300 rounded-full mr-2" src={logo} alt="Edugram Logo" />
-                    <Link to="/" className="dark:text-neutral-300 text-neutral-900 text-lg font-bold">
+                    {/* <Link to="/" className="dark:text-neutral-300 text-neutral-900 text-lg font-bold">
                         Edugram
-                    </Link>
+                    </Link> */}
+                    <Link to="/" className="from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent text-3xl font-black uppercase">                          
+                            Edugram
+                        </Link> 
                 </div>
                 <div className='lg:hidden'>
                     <Switcher />
