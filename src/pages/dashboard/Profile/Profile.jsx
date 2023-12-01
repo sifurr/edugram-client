@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet-async";
 const Profile = () => {
     const { user } = useAuth();
     const { data, refetch, isLoading } = useUser([]);
+    
 
     if (isLoading) {
         return <Spinner />

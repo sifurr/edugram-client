@@ -87,6 +87,15 @@ const Sidebar = () => {
                                 </span>
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/dashboard/profile" className="flex gap-3">
+                                <User />
+                                <span
+                                    className={`${!sidebarOpen && "hidden"}`}>
+                                    Profile
+                                </span>
+                            </NavLink>
+                        </li>
 
                         {
                             data?.user?.role === "student" &&
@@ -179,15 +188,7 @@ const Sidebar = () => {
                             </>
                         }
 
-                        <li>
-                            <NavLink to="/dashboard/profile" className="flex gap-3">
-                                <User />
-                                <span
-                                    className={`${!sidebarOpen && "hidden"}`}>
-                                    Profile
-                                </span>
-                            </NavLink>
-                        </li>
+
                         <li>
                             <NavLink onClick={handleLogout} to="/" className="flex gap-3">
                                 <LogOut />

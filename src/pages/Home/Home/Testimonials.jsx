@@ -17,7 +17,7 @@ const Testimonials = () => {
         }
     });
 
-    // console.log("feedbacks", feedbacks)
+    console.log("feedbacks", feedbacks)
 
 
     const [sliderRef] = useKeenSlider({
@@ -35,8 +35,7 @@ const Testimonials = () => {
     }
 
     return (
-        <section className='mx-20'>
-            
+        <section className='mx-20'>            
             <h2 className="font-bold text-xl lg:text-2xl p-4 text-center mb-4 from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent">                          
                             <span className="text-4xl lg:text-7xl font-black uppercase">Testimonials</span>
                         </h2>            
@@ -68,6 +67,9 @@ const Testimonials = () => {
                                             </div>
                                         </div>
 
+                                        <p className="mt-4 dark:text-neutral-300 capitalize font-bold">
+                                            {feedback?.classTitle}
+                                        </p>
                                         <p className="mt-4 dark:text-neutral-300">
                                             {feedback?.description}
                                         </p>

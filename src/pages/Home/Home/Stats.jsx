@@ -36,10 +36,7 @@ const Stats = () => {
                         <div>
                             <section className="bg-gray-50  dark:bg-gray-900 text-neutral-900 dark:text-neutral-300 rounded-md">
                                 <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-                                    <div className="mx-auto max-w-3xl text-center">
-                                        <h2 className="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl">
-                                            Discover Our Numbers
-                                        </h2>
+                                    <div className="mx-auto max-w-3xl text-center">                                        
                                         <h2 className="font-bold text-xl lg:text-2xl p-4 text-center mb-4 from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent">                          
                             <span className="text-4xl lg:text-7xl font-black uppercase">Discover Our Numbers</span>
                         </h2>   
@@ -83,7 +80,7 @@ const Stats = () => {
                                                 <dt
                                                     className="order-last text-lg font-medium text-gray-500 dark:text-gray-400"
                                                 >
-                                                    Total Enrollment
+                                                    Total Enrollments
                                                     
                                                 </dt>
 

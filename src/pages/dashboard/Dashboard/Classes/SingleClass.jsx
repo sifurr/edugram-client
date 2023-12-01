@@ -1,53 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
-import SingleClass from "./SingleClass";
+import useAxiosPublic from "../../../../hooks/useAxiosPublic";
+import { useEffect } from "react";
 
+        
+        
+const SingleClass = ({classInfo, setClassId, enrollments}) => {
+    // const axiosPublic = useAxiosPublic();
+    // const { data:enrollments } = useQuery({
+    //     queryKey: ['individualClassEnrollments'],
+    //     queryFn: async () => {
+    //         const res = await axiosPublic.get(`/api/v1/payments/individual-class-enrollments/${classInfo?._id}`);
+    //         return res.data;
+    //     }
+    // })
 
+    // useEffect(()=>{
+    //     setClassId(classInfo._id);
+    // }, [classInfo._id, setClassId])
 
-const AllClasses = () => {
-    const [classId, setClassId] = useState("");
-    const axiosPublic = useAxiosPublic();
-    const { data } = useQuery({
-        queryKey: ['allClasses', 'status'],
-        queryFn: async () => {
-            const res = await axiosPublic.get("/api/v1/users/all-classes", {withCredentials:true});
-            return res.data;
-        }
-    })
-
-    useEffect(()=>{
-        const ids = data?.find(cls => setClassId(cls._id))
-        console.log(ids);
-    },[data])
-
-
-
-    const { data:enrollments="" } = useQuery({
-        queryKey: ['individualClassEnrollments'],
-        queryFn: async () => {
-            const res = await axiosPublic.get(`/api/v1/payments/individual-class-enrollments/${classId}`);
-            return res.data;
-        }
-    })
-
-   
-
+    // console.log("enrollments: ", enrollments);
     return (
-        <div className="bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300 px-3 lg:px-20 ">
-             <Helmet>
-                <title>Edugram | All Classes</title>
-            </Helmet>
-
-            <h2 className='text-3xl text-center py-10'>All Classes</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-6">
-
-            {
-                data?.map(classInfo =>
-                    // <SingleClass key={classInfo.id} enrollments={enrollments} setClassId={setClassId} classInfo={classInfo} />
-                    <div key={classInfo._id} className="">
+        <div key={classInfo._id} className="">
                         <div className="relative block overflow-hidden">
                             <button
                                 className="absolute end-4 top-4 z-10 rounded-lg bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
@@ -68,7 +42,7 @@ const AllClasses = () => {
 
                                 <p className="mt-1.5 text-sm text-gray-700 capitalize">Posted by: {classInfo?.name}</p>
                                 <p className="mt-1.5 text-sm text-gray-700 capitalize">{classInfo?.description}</p>
-                                <p className="mt-1.5 text-sm text-gray-700 capitalize">Total Enrollment: </p>
+                                <p className="mt-1.5 text-sm text-gray-700 capitalize">Total Enrollment: {enrollments}</p>
 
 
                                 <Link to={`/class/${classInfo?._id}`}
@@ -87,11 +61,7 @@ const AllClasses = () => {
                             </div>
                         </div>
                     </div>
-                )
-            }
-            </div>
-        </div>
     );
 };
 
-export default AllClasses;
+export default SingleClass;

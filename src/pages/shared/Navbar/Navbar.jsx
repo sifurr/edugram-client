@@ -56,9 +56,9 @@ const Navbar = () => {
                     {/* <Link to="/" className="dark:text-neutral-300 text-neutral-900 text-lg font-bold">
                         Edugram
                     </Link> */}
-                    <Link to="/" className="from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent text-3xl font-black uppercase">                          
-                            Edugram
-                        </Link> 
+                    <Link to="/" className="from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent text-3xl font-black uppercase">
+                        Edugram
+                    </Link>
                 </div>
                 <div className='lg:hidden'>
                     <Switcher />
@@ -78,16 +78,17 @@ const Navbar = () => {
                                 </Link>
                             </li>
 
+
+                            <li>
+                                <Link to="/teach-on" className="text-neutral-900 dark:text-neutral-300 hover:text-gray-300">
+                                    Teach On Edugram
+                                </Link>
+                            </li>
+
+
                             {user && (
                                 <>
-                                    {
-                                        isTeacher ||
-                                        <li>
-                                            <Link to="/teach-on" className="text-neutral-900 dark:text-neutral-300 hover:text-gray-300">
-                                                Teach On Edugram
-                                            </Link>
-                                        </li>
-                                    }                                   
+
 
                                     <li>
                                         <Link to="#" onClick={handleLogout} className="text-neutral-900 dark:text-neutral-300 hover:text-gray-300 lg:hidden ">
