@@ -68,7 +68,8 @@ const AllClasses = () => {
 
                                 <p className="mt-1.5 text-sm text-gray-700 capitalize">Posted by: {classInfo?.name}</p>
                                 <p className="mt-1.5 text-sm text-gray-700 capitalize">{classInfo?.description}</p>
-                                <p className="mt-1.5 text-sm text-gray-700 capitalize">Total Enrollment: </p>
+                                {/* TODO: has to fix the total enrollment  */}
+                                {/* <p className="mt-1.5 text-sm text-gray-700 capitalize">Total Enrollment: </p> */}
 
 
                                 <Link to={`/class/${classInfo?._id}`}
