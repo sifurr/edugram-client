@@ -194,7 +194,7 @@ const MyClassProgressDetails = () => {
                                         {/* Modal header */}
                                         <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                                Feedback
+                                                Assignment
                                             </h3>
                                             <button
                                                 type="button"
@@ -219,7 +219,7 @@ const MyClassProgressDetails = () => {
                                                         <input
                                                             {...register("title", { required: true })}
                                                             type="text"
-                                                            className="w-full rounded-lg bg-gray-50 dark:bg-gray-600 text-neutral-900 dark:text-white border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                                                            className="w-full rounded-lg bg-gray-50 dark:bg-gray-600 text-neutral-900 dark:text-white placeholder:dark:text-white border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                                             placeholder="Assignment title"
                                                             id="title"
 
@@ -250,7 +250,7 @@ const MyClassProgressDetails = () => {
                                                     <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                                                     <textarea
                                                         {...register("description", { required: true })}
-                                                        id="description" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write feedback here"></textarea>
+                                                        id="description" rows="4" className="block p-2.5 w-full  placeholder:dark:text-white text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write feedback here"></textarea>
                                                     <div className="my-2">
                                                         {errors.description && <span className="text-xs text-red-500 ">Description number is required</span>}
                                                     </div>

@@ -24,27 +24,26 @@ const UpdateClass = () => {
             return res.data;
         }
     })
-    // console.log(id)
+    // console.log("id---->",id, data);
+
+    const originalImage = data?.image;
+    // console.log(originalImage)
 
     const onSubmit = async (data) => {
         // console.log("on submit clicked")
 
-        // upload an image to the imagebb, and then get an url
-        // const imageFile = {image: data.image[0]} ;
-        // const res = await axios.post(image_hosting_api, imageFile, {
-        //     headers: {"content-type": "multipart/form-data"}
-        // } )
-        // console.log(res.data)
+
                    
             const classInfo = {
                 title: data.title,               
                 price: parseFloat(data.price),
                 description: data.description,
+                image: originalImage
                 // image: res.data.data.display_url               
             }
 
             const response = await axiosPublic.patch(`/api/v1/users/classes/${id}`, classInfo, {withCredentials:true});
-            console.log(response.data);
+            // console.log(response.data);
 
             if(response.data.modifiedCount > 0)
             {
@@ -61,7 +60,7 @@ const UpdateClass = () => {
             navigate("/dashboard/my-class")
         
 
-        console.log("Image url",data)
+        // console.log("Image url",data)
     }
 
    

@@ -6,19 +6,19 @@ import {
     ChevronFirst,
     ChevronLast,
     Contact,
+    Home,
     LibrarySquare,
     LogOut,
     Shield,
     ShoppingCart,
     User,
-    Users
+    Users,
 } from "lucide-react";
 
 import { useState } from "react";
 import logo from '../../../assets/edugram-logo.png'
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
-import Spinner from "../../../components/Spinner";
 import useUser from "../../../hooks/useUser";
 
 const Sidebar = () => {
@@ -26,8 +26,9 @@ const Sidebar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const { data, refetch, isLoading } = useUser([]);
 
+
     if (isLoading) {
-        return <Spinner />
+        return
     }
 
     const handleSidebar = () => {
@@ -76,6 +77,16 @@ const Sidebar = () => {
                 </div>
                 <ul className="flex flex-col items-center">
                     <div className="space-y-3">
+
+                        <li>
+                            <NavLink to="/" className="flex gap-3">
+                                <Home />
+                                <span
+                                    className={`${!sidebarOpen && "hidden"}`}>
+                                    Home
+                                </span>
+                            </NavLink>
+                        </li>
 
                         {
                             data?.user?.role === "student" &&
@@ -131,7 +142,7 @@ const Sidebar = () => {
                                             My Class
                                         </span>
                                     </NavLink>
-                                </li>                                
+                                </li>
                             </>
                         }
                         {

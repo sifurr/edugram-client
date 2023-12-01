@@ -16,6 +16,8 @@ const useMyTeachingRequest = () => {
         }
     })
 
+    console.log("From use teaching req", data)
+
     return {data, refetch, isLoading}
 };
 

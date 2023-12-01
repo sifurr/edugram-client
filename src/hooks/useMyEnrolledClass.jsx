@@ -11,7 +11,7 @@ const useMyEnrolledClass = () => {
     const {data, refetch} = useQuery({
         queryKey: ['paidClasses'],
         queryFn: async () =>{
-            const res = await axiosPublic.get(`/api/v1/users/classes/${user?.email}`, {withCredentials: true})
+            const res = await axiosPublic.get(`/api/v1/users/my-classes/${user?.email}`, {withCredentials: true})
             return res.data;
         }
     })

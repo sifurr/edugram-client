@@ -1,24 +1,31 @@
-.mega-menu {
-  display: none;
+.navbar {
+  z-index: 1000;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
   left: 0;
-  position: absolute;
-  text-align: left;
   width: 100%;
 }
 
-.toggle-input {
-  display: none;
-}
-.toggle-input:not(checked) ~ .mega-menu {
-  display: none;
+
+.dropdown-menu {
+  z-index: 1000; 
 }
 
-.toggle-input:checked ~ .mega-menu {
-  display: block;
+
+.dropdown {
+  position: relative;
 }
 
-.toggle-input:checked + label {
-  color: white;
-  background: #000927;
-  /* background: #2c5282; */
+.dropdown-menu {
+  position: absolute; /* or position: fixed; */
+  top: 100%; /* or adjust based on your layout */
+  left: 0;
+  display: none; /* Initially hide the dropdown */
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block; /* Show the dropdown on hover */
 }

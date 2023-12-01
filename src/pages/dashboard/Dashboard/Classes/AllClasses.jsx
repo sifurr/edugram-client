@@ -18,17 +18,17 @@ const AllClasses = () => {
     // console.log("all classes: ", data);
 
     return (
-        <div className="bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300 px-20">
+        <div className="bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300 px-3 lg:px-20 ">
              <Helmet>
                 <title>Edugram | All Classes</title>
             </Helmet>
 
             <h2 className='text-3xl text-center py-10'>All Classes</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-6">
 
             {
                 data?.map(classInfo =>
-                    <div key={classInfo._id}>
+                    <div key={classInfo._id} className="">
                         <div className="relative block overflow-hidden">
                             <button
                                 className="absolute end-4 top-4 z-10 rounded-lg bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
@@ -39,7 +39,7 @@ const AllClasses = () => {
                             <img
                                 src={classInfo?.image}
                                 alt="class image"
-                                className="h-32 md:40 lg:h-64 w-full object-cover transition duration-500 hover:scale-105 sm:h-72"
+                                className="h-32 md:40 lg:h-64 w-full object-cover transition duration-500 hover:scale-105"
                             />
 
                             <div className="relative border border-gray-100 bg-white p-6">

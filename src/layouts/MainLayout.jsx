@@ -1,13 +1,18 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../pages/shared/Navbar/Navbar";
+import Footer from "../pages/shared/Footer";
 
-        
-        
-const MainLayout = () => { 
+
+
+
+const MainLayout = () => {
     return (
-        <div>
+        <div className="bg-gray-50 dark:bg-gray-900">
             <Navbar></Navbar>
-           <Outlet></Outlet>           
+            <div className="mt-12">
+                <Outlet></Outlet>
+            </div>
+            <Footer />
         </div>
     );
 

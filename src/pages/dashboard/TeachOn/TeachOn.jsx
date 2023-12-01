@@ -56,13 +56,13 @@ const TeachOn = () => {
             <h2 className='text-3xl text-center pt-10'>Teach On Edugram</h2>
             <div>
                 {
-                    data?.approval === "pending" ? 
+                    data?.approval !== "approved" ? 
                 <section>
                     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                         <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
                             <div className="lg:col-span-2 lg:py-12">
                                 <p className="max-w-xl text-lg mt-[30%]">
-                                    Welcome to Edugram! We appreciate your endeavour to share your knowledge with world.
+                                    Welcome to Edugram! We appreciate your endeavour to share your knowledge with the world.
                                 </p>
                             </div>
 

@@ -67,27 +67,30 @@ const Profile = () => {
                         >
                             <strong className="font-medium text-neutral-900 dark:text-neutral-300">Phone</strong>
 
-                            <p className="mt-1 text-xs font-medium  text-neutral-900 dark:text-neutral-300">                                
+                            <p className="mt-1 text-xs font-medium  text-neutral-900 dark:text-neutral-300">
 
                                 {
                                     data.user?.phone == "" ?
-                                        <Link
-                                            to={`/dashboard/add-phone/${data.user?._id}`}
-                                            className="group relative inline-block overflow-hidden border border-indigo-500 px-4 py-2 focus:outline-none focus:ring"
+                                        <>
+                                            <p className="mb-3">You haven't added your phone number yet!</p>
+                                            <Link
+                                                to={`/dashboard/add-phone/${data.user?._id}`}
+                                                className="group relative inline-block overflow-hidden border border-indigo-500 px-4 py-2 focus:outline-none focus:ring"
 
-                                        >
-                                            <span
-                                                className="absolute inset-y-0 left-0 w-[2px] bg-indigo-500 transition-all group-hover:w-full group-active:bg-indigo-500"
-                                            ></span>
-                                            <span
-                                                className="relative text-sm font-medium text-indigo-500 transition-colors group-hover:text-white"
                                             >
-                                               Add Phone
-                                            </span>
-                                        </Link>
+                                                <span
+                                                    className="absolute inset-y-0 left-0 w-[2px] bg-indigo-500 transition-all group-hover:w-full group-active:bg-indigo-500"
+                                                ></span>
+                                                <span
+                                                    className="relative text-sm font-medium text-indigo-500 transition-colors group-hover:text-white"
+                                                >
+                                                    Add Phone
+                                                </span>
+                                            </Link>
+                                        </>
 
                                         :
-                                        data.user?.phone                                     
+                                        data.user?.phone
 
 
                                 }
