@@ -136,7 +136,8 @@ const TeacherRequests = () => {
                         id="Search"
                         placeholder="Search for..."
                         className="w-full rounded-md border-gray-200 text-neutral-900 py-2.5 pe-10 shadow-sm sm:text-sm"
-                    />                    
+                    />
+                    
 
                     <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
                         <button type="submit" className="text-gray-600 hover:text-gray-700">

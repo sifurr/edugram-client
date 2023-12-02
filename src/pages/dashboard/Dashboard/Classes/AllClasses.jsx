@@ -67,7 +67,7 @@ const AllClasses = () => {
                                 <h3 className="mt-4 text-lg font-medium text-gray-900 capitalize">{classInfo?.title}</h3>
 
                                 <p className="mt-1.5 text-sm text-gray-700 capitalize">Posted by: {classInfo?.name}</p>
-                                <p className="mt-1.5 text-sm text-gray-700 capitalize">{classInfo?.description}</p>
+                                <p className="mt-1.5 text-sm text-gray-700 capitalize mb-10">{classInfo.description.slice(0, 50)+"..."}</p>
                                 {/* TODO: has to fix the total enrollment  */}
                                 {/* <p className="mt-1.5 text-sm text-gray-700 capitalize">Total Enrollment: </p> */}
 

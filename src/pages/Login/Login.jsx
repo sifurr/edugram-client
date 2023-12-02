@@ -179,7 +179,7 @@ const Login = () => {
                                         pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
                                     })
                                     }
-                                    type="text"
+                                    type="password"
                                     id="Password"
                                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                                 />

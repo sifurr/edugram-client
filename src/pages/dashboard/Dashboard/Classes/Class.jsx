@@ -95,7 +95,7 @@ const Class = ({ classInfo, refetch }) => {
                     <h3 className="mt-4 text-lg font-medium text-gray-900 capitalize">{classInfo?.title}</h3>
 
                     <p className="mt-1.5 text-sm text-gray-700 capitalize">Status: {classInfo?.status}</p>
-                    <p className="mt-1.5 text-sm text-gray-700 capitalize">{classInfo?.description}</p>
+                    <p className="mt-1.5 mb-10 text-sm text-gray-700 capitalize">{classInfo?.description?.slice(0, 60) + "..."}</p>
 
 
                     <button

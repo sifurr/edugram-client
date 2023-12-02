@@ -73,7 +73,7 @@ const SignUp = () => {
                     name: res.user?.displayName,
                     email: res.user?.email,
                     role: 'student',
-                    phone: "",
+                    phone:  "",
                     teacherRequest: false
                 }
                 const email = res.user.email;
@@ -222,13 +222,13 @@ const SignUp = () => {
                                 </label>
 
                                 <input
-                                    {...register("phone", { required: true })}
+                                    {...register("phone", { required: false })}
 
                                     type="text"
                                     id="Phone"
                                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                                 />
-                                {errors.phone && <span className="text-red-600 text-xs">Phone is required</span>}
+                                
                             </div>
 
                             <div className="col-span-6 sm:col-span-3">
@@ -247,7 +247,7 @@ const SignUp = () => {
                                         pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
                                     })
                                     }
-                                    type="text"
+                                    type="password"
                                     id="Password"
                                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                                 />

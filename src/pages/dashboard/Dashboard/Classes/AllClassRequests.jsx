@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { Tooltip } from "flowbite-react";
 
 
 
@@ -173,7 +174,13 @@ const AllClassRequests = () => {
                                         <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             {classReq?.email}
                                         </td>
-                                        <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">{classReq?.description}</td>
+                                        <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
+                                            
+                                        <Tooltip className="w-1/4 overflow-auto" content={`${classReq?.description}`}>
+                                            {classReq?.description.slice(0, 20)}
+                                          
+                                        </Tooltip>
+                                        </td>
                                         <td className="capitalize whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300 ">{classReq?.status}</td>
                                         <td className="whitespace-nowrap px-2 py-2 text-neutral-900 dark:text-neutral-300">
                                             <button
