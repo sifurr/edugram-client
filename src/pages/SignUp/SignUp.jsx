@@ -111,7 +111,7 @@ const SignUp = () => {
 
     return (
 
-        <section className="bg-white">
+        <section className=" bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300">
             <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
                 <section
                     className="relative flex h-32 items-end bg-[#000927] lg:col-span-5 lg:h-full xl:col-span-6"
@@ -166,7 +166,7 @@ const SignUp = () => {
                             <div className="col-span-6 sm:col-span-3">
                                 <label
                                     htmlFor="FirstName"
-                                    className="block text-sm font-medium text-gray-700"
+                                    className="block text-sm font-medium text-neutral-900 dark:text-neutral-300"
                                 >
                                     Name
                                 </label>
@@ -181,7 +181,7 @@ const SignUp = () => {
                             </div>
 
                             <div className="col-span-6">
-                                <label htmlFor="PhotoUrl" className="block text-sm font-medium text-gray-700">
+                                <label htmlFor="PhotoUrl" className="block text-sm font-medium text-neutral-900 dark:text-neutral-300">
                                     PhotoUrl
                                 </label>
 
@@ -198,7 +198,7 @@ const SignUp = () => {
                             <div className="col-span-6 sm:col-span-3">
                                 <label
                                     htmlFor="Email"
-                                    className="block text-sm font-medium text-gray-700"
+                                    className="block text-sm font-medium text-neutral-900 dark:text-neutral-300"
                                 >
                                     Email
                                 </label>
@@ -216,7 +216,7 @@ const SignUp = () => {
                             <div className="col-span-6 sm:col-span-3">
                                 <label
                                     htmlFor="Phone"
-                                    className="block text-sm font-medium text-gray-700"
+                                    className="block text-sm font-medium text-neutral-900 dark:text-neutral-300"
                                 >
                                     Phone
                                 </label>
@@ -234,7 +234,7 @@ const SignUp = () => {
                             <div className="col-span-6 sm:col-span-3">
                                 <label
                                     htmlFor="Password"
-                                    className="block text-sm font-medium text-gray-700"
+                                    className="block text-sm font-medium text-neutral-900 dark:text-neutral-300"
                                 >
                                     Password
                                 </label>
@@ -266,25 +266,40 @@ const SignUp = () => {
                             </div>                            
 
                             <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                                <button
-                                    className="inline-block shrink-0 rounded-md border border-[#000927] bg-[#000927] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#000927] focus:outline-none focus:ring active:text-[#000927]"
+                            <button
+                                    className="group relative inline-block overflow-hidden border border-indigo-500 px-4 py-2 focus:outline-none focus:ring"
                                 >
-                                    Create an account
+                                    <span
+                                        className="absolute inset-y-0 left-0 w-[2px] bg-indigo-500 transition-all group-hover:w-full group-active:bg-indigo-500"
+                                    ></span>
+                                    <span
+                                        className="relative text-sm font-medium text-indigo-500 transition-colors group-hover:text-white"
+                                    >
+                                        Create an account
+                                    </span>
                                 </button>
 
-                                <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+                                <p className="mt-4 text-sm  text-neutral-900 dark:text-neutral-300">
                                     Already have an account?
-                                    <Link to="/login" className="text-gray-700 underline"> Log in</Link>
+                                    <Link to="/login" className=" text-neutral-900 dark:text-neutral-300 underline"> Log in</Link>
                                 </p>
                             </div>
                         </form>
-                        <div className="col-span-6 mt-6 sm:flex sm:items-center sm:gap-4">
+                        <div className="col-span-6 mt-6 sm:flex sm:items-center sm:gap-4">                            
+
                             <button
-                                onClick={handleGoogleLogin}
-                                className="inline-block shrink-0 rounded-md border border-[#000927] bg-[#000927] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#000927] focus:outline-none focus:ring active:text-[#000927]"
-                            >
-                                Login with Google
-                            </button>
+                            onClick={handleGoogleLogin}
+                                    className="group relative inline-block overflow-hidden border border-indigo-500 px-4 py-2 focus:outline-none focus:ring"
+                                >
+                                    <span
+                                        className="absolute inset-y-0 left-0 w-[2px] bg-indigo-500 transition-all group-hover:w-full group-active:bg-indigo-500"
+                                    ></span>
+                                    <span
+                                        className="relative text-sm font-medium text-indigo-500 transition-colors group-hover:text-white"
+                                    >
+                                        Login with Google
+                                    </span>
+                                </button>
                         </div>
                     </div>
                 </main>

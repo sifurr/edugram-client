@@ -55,10 +55,10 @@ const Login = () => {
                     role: 'student',
                     phone: "",
                     teacherRequest: false,
-                    
+
                 }
-                const email = res.user.email;  
-                const user = {email};             
+                const email = res.user.email;
+                const user = { email };
 
                 axiosPublic.post("/api/v1/auth/access-token", user, { withCredentials: true })
                     .then(res => {
@@ -66,23 +66,21 @@ const Login = () => {
                         if (res.data.success) {
 
                             axiosPublic.post("/api/v1/users", userInfo)
-                            .then(result => {
-                                if(result.data.insertedId)
-                                {
-                                    Swal.fire({
-                                        title: "Logged in successfully!",
-                                        text: "",
-                                        icon: "success",
-                                        showConfirmButton: false,
-                                        timer: 1000
-                                    });
-                                    // console.log("user: ", res.user);
-                                    navigate(from, { replace: true })
-                                }
-                            })
+                                .then(result => {
+                                    if (result.data.insertedId) {
+                                        Swal.fire({
+                                            title: "Logged in successfully!",
+                                            text: "",
+                                            icon: "success",
+                                            showConfirmButton: false,
+                                            timer: 1000
+                                        });
+                                        // console.log("user: ", res.user);
+                                        navigate(from, { replace: true })
+                                    }
+                                })
                             // .catch(err => console.log(err))
 
-                            
                         }
                     })
             })
@@ -93,10 +91,10 @@ const Login = () => {
 
     return (
 
-        <section className="bg-white">
+        <section className="bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300">
             <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
                 <section
-                    className="relative flex h-32 items-end bg-[#000927] lg:col-span-5 lg:h-full xl:col-span-6"
+                    className="relative flex h-32 items-end bg-gray-50 dark:bg-gray-900 text-neutral-900 dark:text-neutral-300 lg:col-span-5 lg:h-full xl:col-span-6"
                 >
                     <img
                         alt="bg"
@@ -150,7 +148,7 @@ const Login = () => {
                             <div className="col-span-6 sm:col-span-3">
                                 <label
                                     htmlFor="Email"
-                                    className="block text-sm font-medium text-gray-700"
+                                    className="block text-sm font-medium dark:text-gray-300 text-gray-900"
                                 >
                                     Email
                                 </label>
@@ -168,7 +166,7 @@ const Login = () => {
                             <div className="col-span-6 sm:col-span-3">
                                 <label
                                     htmlFor="Password"
-                                    className="block text-sm font-medium text-gray-700"
+                                    className="block text-sm font-medium dark:text-gray-300 text-gray-900"
                                 >
                                     Password
                                 </label>
@@ -201,24 +199,38 @@ const Login = () => {
 
                             <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                                 <button
-                                    className="inline-block shrink-0 rounded-md border border-[#000927] bg-[#000927] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#000927] focus:outline-none focus:ring active:text-[#000927]"
+                                    className="group relative inline-block overflow-hidden border border-indigo-500 px-4 py-2 focus:outline-none focus:ring"
                                 >
-                                    Login
+                                    <span
+                                        className="absolute inset-y-0 left-0 w-[2px] bg-indigo-500 transition-all group-hover:w-full group-active:bg-indigo-500"
+                                    ></span>
+                                    <span
+                                        className="relative text-sm font-medium text-indigo-500 transition-colors group-hover:text-white"
+                                    >
+                                        Login
+                                    </span>
                                 </button>
 
-                                <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+                                <p className="mt-4 text-sm  dark:text-gray-300 text-gray-900 sm:mt-0">
                                     Do not have an account?
-                                    <Link to="/signup" className="text-gray-700 underline"> Signup</Link>
+                                    <Link to="/signup" className=" dark:text-gray-300 text-gray-900 underline"> Signup</Link>
                                 </p>
                             </div>
                         </form>
-                        <div className="col-span-6 mt-6 sm:flex sm:items-center sm:gap-4">
+                        <div className="col-span-6 mt-6 sm:flex sm:items-center sm:gap-4">                            
                             <button
-                                onClick={handleGoogleLogin}
-                                className="inline-block shrink-0 rounded-md border border-[#000927] bg-[#000927] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#000927] focus:outline-none focus:ring active:text-[#000927]"
-                            >
-                                Login with Google
-                            </button>
+                            onClick={handleGoogleLogin}
+                                    className="group relative inline-block overflow-hidden border border-indigo-500 px-4 py-2 focus:outline-none focus:ring"
+                                >
+                                    <span
+                                        className="absolute inset-y-0 left-0 w-[2px] bg-indigo-500 transition-all group-hover:w-full group-active:bg-indigo-500"
+                                    ></span>
+                                    <span
+                                        className="relative text-sm font-medium text-indigo-500 transition-colors group-hover:text-white"
+                                    >
+                                        Login with Google
+                                    </span>
+                                </button>
                         </div>
                     </div>
                 </main>
