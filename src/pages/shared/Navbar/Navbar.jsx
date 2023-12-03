@@ -8,6 +8,7 @@ import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import { useState } from 'react';
 import { AlignRight } from 'lucide-react';
 import useTeacher from '../../../hooks/useTeacher';
+import toast from 'react-hot-toast';
 
 
 const Navbar = () => {
@@ -24,21 +25,25 @@ const Navbar = () => {
             .then(() => {
 
                 clearToken();
+                toast.success("Logged out successfully!");
 
-                Swal.fire({
-                    title: "Logged out successfully!",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                // Swal.fire({
+                //     title: "Logged out successfully!",
+                //     icon: "success",
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // });
+
             })
             .catch(err => {
-                Swal.fire({
-                    title: `Something is wrong!, ${err}`,
-                    icon: "error",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                toast.error(`Something is wrong!`)
+
+                // Swal.fire({
+                //     title: `Something is wrong!, ${err}`,
+                //     icon: "error",
+                //     showConfirmButton: false,
+                //     timer: 1500
+                // });
             })
     }
 

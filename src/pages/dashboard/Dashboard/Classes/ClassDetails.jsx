@@ -18,6 +18,16 @@ const ClassDetails = () => {
         },
     });
 
+    const { data: numberOfEnrollments } = useQuery({
+        queryKey: ["numberOfEnrollments"],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/api/v1/payments-enrollments/${id}`)
+            return res.data;
+        }
+    })
+
+    // console.log("numberOfEnrollments --->", numberOfEnrollments);
+
     const handleEnrollment = async () => {
         // add data to the database
         const cartItem = {
@@ -37,22 +47,28 @@ const ClassDetails = () => {
                     navigate("/dashboard/cart");                    
                 }
             })
-            .catch((err) => console.log(err));
+            .catch(
+                // (err) => console.log(err)
+            );
     };
 
     return (
         <div className="container mx-auto my-8">
             <div className="bg-white p-8 rounded-md shadow-md">
                 <h2 className="text-3xl font-semibold mb-4">{classData?.title}</h2>
-                <p className="text-gray-600 mb-4">Teacher: {classData?.name}</p>
+                <p className="text-gray-600 mb-4"><b>Teacher:</b> {classData?.name}</p>
                 <img
                     src={classData?.image}
                     alt={classData?.title}
                     className="w-full h-64 object-cover mb-4"
                 />
-                <p className="text-lg text-gray-800 mb-4">${classData?.price}</p>
+                <p className="text-lg text-gray-800 mb-4"><b>Price:</b> ${classData?.price}</p>
                 <p className="text-gray-600 mb-4">{classData?.description}</p>
-                <p className="text-gray-600 mb-4">Total Enrolment: </p>
+
+
+                <p className="text-gray-600 mb-4"><b>Total Enrolment:</b> {numberOfEnrollments?.totalEnrollments} </p>                
+
+
                 <button
                     onClick={handleEnrollment}
                     className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"

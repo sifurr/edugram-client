@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from 'sweetalert2';
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import bg from '../../assets/login-bg.svg';
+import toast from "react-hot-toast";
 
 
 
@@ -40,8 +41,9 @@ const Login = () => {
                         }
                     })
             })
-            .catch(err => {
-                // console.log(err.message)
+            .catch(err => {                
+                toast.error(`${err.message}`)
+                console.log(err.message)
             })
     }
 
@@ -79,13 +81,18 @@ const Login = () => {
                                         navigate(from, { replace: true })
                                     }
                                 })
-                            // .catch(err => console.log(err))
+                                .catch(err => {
+                                    toast.error(`${err.message}`)
+                                    console.log(err)
+                                }
+                                )
 
                         }
                     })
             })
             .catch(err => {
-                // console.log(err)
+                toast.error(`${err.message}`)
+                console.log(err)
             })
     }
 
@@ -217,20 +224,20 @@ const Login = () => {
                                 </p>
                             </div>
                         </form>
-                        <div className="col-span-6 mt-6 sm:flex sm:items-center sm:gap-4">                            
+                        <div className="col-span-6 mt-6 sm:flex sm:items-center sm:gap-4">
                             <button
-                            onClick={handleGoogleLogin}
-                                    className="group relative inline-block overflow-hidden border border-indigo-500 px-4 py-2 focus:outline-none focus:ring"
+                                onClick={handleGoogleLogin}
+                                className="group relative inline-block overflow-hidden border border-indigo-500 px-4 py-2 focus:outline-none focus:ring"
+                            >
+                                <span
+                                    className="absolute inset-y-0 left-0 w-[2px] bg-indigo-500 transition-all group-hover:w-full group-active:bg-indigo-500"
+                                ></span>
+                                <span
+                                    className="relative text-sm font-medium text-indigo-500 transition-colors group-hover:text-white"
                                 >
-                                    <span
-                                        className="absolute inset-y-0 left-0 w-[2px] bg-indigo-500 transition-all group-hover:w-full group-active:bg-indigo-500"
-                                    ></span>
-                                    <span
-                                        className="relative text-sm font-medium text-indigo-500 transition-colors group-hover:text-white"
-                                    >
-                                        Login with Google
-                                    </span>
-                                </button>
+                                    Login with Google
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </main>

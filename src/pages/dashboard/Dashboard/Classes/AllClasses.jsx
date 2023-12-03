@@ -25,13 +25,13 @@ const AllClasses = () => {
 
 
 
-    const { data:enrollments="" } = useQuery({
-        queryKey: ['individualClassEnrollments'],
-        queryFn: async () => {
-            const res = await axiosPublic.get(`/api/v1/payments/individual-class-enrollments/${classId}`);
-            return res.data;
-        }
-    })
+    // const { data:enrollments="" } = useQuery({
+    //     queryKey: ['individualClassEnrollments'],
+    //     queryFn: async () => {
+    //         const res = await axiosPublic.get(`/api/v1/payments/individual-class-enrollments/${classId}`);
+    //         return res.data;
+    //     }
+    // })
 
    
 
@@ -52,7 +52,7 @@ const AllClasses = () => {
                             <button
                                 className="absolute end-4 top-4 z-10 rounded-lg bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
                             >
-                                <span className="">${classInfo?.price}</span>
+                                <span>${classInfo?.price}</span>
                             </button>
 
                             <img
@@ -66,7 +66,7 @@ const AllClasses = () => {
 
                                 <h3 className="mt-4 text-lg font-medium text-gray-900 capitalize">{classInfo?.title}</h3>
 
-                                <p className="mt-1.5 text-sm text-gray-700 capitalize">Posted by: {classInfo?.name}</p>
+                                <p className="mt-1.5 text-sm text-gray-700 capitalize"><b>Posted by:</b> {classInfo?.name}</p>
                                 <p className="mt-1.5 text-sm text-gray-700 capitalize mb-10">{classInfo.description.slice(0, 50)+"..."}</p>
                                 {/* TODO: has to fix the total enrollment  */}
                                 {/* <p className="mt-1.5 text-sm text-gray-700 capitalize">Total Enrollment: </p> */}
