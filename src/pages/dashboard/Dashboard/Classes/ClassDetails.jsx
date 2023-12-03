@@ -52,7 +52,7 @@ const ClassDetails = () => {
                 />
                 <p className="text-lg text-gray-800 mb-4">${classData?.price}</p>
                 <p className="text-gray-600 mb-4">{classData?.description}</p>
-                <p className="text-gray-600 mb-4">Total Enrolment: 0</p>
+                <p className="text-gray-600 mb-4">Total Enrolment: </p>
                 <button
                     onClick={handleEnrollment}
                     className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
