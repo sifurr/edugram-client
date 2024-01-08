@@ -1,8 +1,4 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Link } from 'react-router-dom'
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import Spinner from '../../../components/Spinner';
@@ -34,19 +30,9 @@ const RecommendedClasses = () => {
       <h2 className="font-bold text-xl lg:text-2xl p-4 text-center mb-4 from-purple-600 via-pink-600 to-blue-600 bg-gradient-to-r bg-clip-text text-transparent">                          
                             <span className="text-4xl lg:text-7xl font-black uppercase">Recommended Classes</span>
                         </h2>
-      <Swiper
-        slidesPerView={3}
-        spaceBetween={30}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-
-        {
-          popularClasses?.slice(0, 6)?.map(classInfo =>
-            <SwiperSlide key={classInfo._key}>          
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-10 p-4 lg:p-10'>
+      {
+          popularClasses?.slice(0, 6)?.map(classInfo =>                    
 
               <div key={classInfo._id}
                 className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-indigo-500/10 hover:shadow-indigo-500/10"
@@ -78,10 +64,10 @@ const RecommendedClasses = () => {
                 </div>
 
               </div>
-            </SwiperSlide>
+          
           )
         }
-      </Swiper>
+      </div>
     </div>
   );
 };
